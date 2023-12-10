@@ -1,0 +1,74 @@
+/* .daily-times {
+    background: #f5f5f5;
+    padding: 20px;
+    width: 50px;
+    margin: 0 auto;   
+    border-radius: 12px;
+    flex: 1;
+  }
+  
+  .title {
+    font-size: 24px;  
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .table {
+    width: 100%;   
+    text-align: center;
+  }  */
+  
+  /* סטיילינג לתאים */
+  
+  /* אנימציות ואפקטים */
+
+
+
+
+
+.daily-times {
+    margin: 50px;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    background: #fafafa;
+    padding: 20px; 
+    /* flex: 1; */
+  }
+  
+  .title {
+    text-shadow: 1px 1px 2px #ddd;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;  
+  }
+  
+  .cell {
+    padding: 8px;
+    font-size: 16px;  
+    border-bottom: 1px solid #eaeaea;
+  }  
+  
+  .table tr:last-child .cell {
+    border-bottom: none;
+  }
+  
+  .cell:first-child {
+    font-weight: 500;
+  }
+  
+  .daily-times:hover {
+    box-shadow: 1px 2px 8px rgba(0,0,0,0.25);  
+    transition: box-shadow 0.2s;
+  }
+  
+  .title {
+    transition: transform 0.1s ease-in;  
+  }
+  
+  .daily-times:hover .title {
+    transform: scale(1.05); 
+  }

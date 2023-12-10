@@ -1,0 +1,59 @@
+.article {
+    display: flex;
+    margin: 50px;
+  }
+  
+  .images {
+    flex: 1;
+    margin-right: 50px; 
+  }
+  
+  .content {
+    flex: 1;  
+  }
+  
+  .title {
+    font-size: 32px;
+    margin: 0;  
+  }
+  
+  .text {
+    margin-top: 30px;
+    font-size: 18px;
+    line-height: 1.8;  
+  } 
+  
+  .date {
+    color: #999;
+    font-style: italic;
+  }
+  
+  .author { 
+    text-align: right;
+    font-style: italic; 
+  }
+  @media (max-width: 768px) {
+
+    .article {
+      flex-direction: column;
+    }
+    
+    .images {
+       margin-right: 0;
+       margin-bottom: 30px;
+    }
+  
+  }
+  .close-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .close-button:hover {
+    background-color: #555;
+  }

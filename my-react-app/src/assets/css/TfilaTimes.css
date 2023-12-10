@@ -1,0 +1,76 @@
+/* .prayer {
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px #ddd;
+  }
+  
+  .frames {
+    background: #eee; 
+    border-radius: 4px;
+  }
+  
+  .frame {
+    background: white;
+    padding: 10px; 
+  }
+  
+  h3 {
+    font-size: 18px;
+    margin-top: 0;  
+  }
+  
+  table {
+    width: 100%; 
+    border-collapse: collapse;
+  }
+  
+  td {
+    padding: 6px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  } */
+
+
+
+  .prayer-times {
+    max-width: 50%;
+    margin: 30px auto;
+    background: #f6f4f4;  
+    padding: 20px;
+    border-radius: 8px;
+    flex: 2;
+  }
+  
+  @media (max-width: 768px) {
+    .prayer-times {
+      max-width: 100%; 
+    }
+  }  
+  
+  .frame {
+    background: white; 
+    padding: 20px;
+    border-radius: 8px;
+    font-family: Verdana, sans-serif;  
+  }
+  
+  .frame:first-child {
+    background: #eee; 
+  }
+  
+  h3 {
+    font-size: 30px;
+    margin-top: 0;
+  }  
+  
+  table {
+    width: 100%;
+    margin-top: 10px;
+  }
+   td {
+    padding: 6px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+   
+ 

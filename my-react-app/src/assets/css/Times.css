@@ -1,0 +1,17 @@
+.times-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+ 
+  
+  /* Add media query for small screens */
+  @media (max-width: 600px) {
+    .tfila-times {
+      flex: 1; /* Takes up full width on small screens */
+    }
+  
+    .daily-times {
+      flex: 1; /* Takes up full width on small screens */
+    }
+  }

@@ -1,0 +1,73 @@
+/* AllCards.css */
+.all-cards {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .all-cards-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  /* הוספת סגנונות לאובייקטים בקונטיינר */
+  .card {
+    position: relative;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  .card-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .card-title {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
+  
+  .card-content {
+    margin: 0;
+    color: #333;
+  }
+  
+  .card-author {
+    margin-top: 10px;
+    color: #666;
+  }
+  
+  @media (min-width: 768px) {
+    /* עמוד מחשב - 4 ריבועים בשורה */
+    .card {
+      width: calc(20% - 20px);
+    }
+  
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    /* פלאפון - 1 ריבוע בשורה */
+    .card {
+      width: 100%;
+    }
+  }
+  
