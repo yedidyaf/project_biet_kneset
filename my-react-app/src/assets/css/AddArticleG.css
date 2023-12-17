@@ -1,0 +1,46 @@
+/* AddArticleG.css */
+.add-article-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.add-article-form label {
+  margin-bottom: 10px;
+}
+
+.add-article-form input,
+.add-article-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.add-article-form input[type="file"] {
+  margin-bottom: 16px;
+}
+
+.add-article-form button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.add-article-form button:hover {
+  background-color: #2980b9;
+}

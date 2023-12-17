@@ -1,14 +1,18 @@
 // MemberForm.jsx
 import React, { useState } from 'react';
 import '../assets/css/MemberForm.css';
+import axios from '../component/Axios';
 
-const MemberForm = ({ onAddMember }) => {
+
+const MemberForm = ({addMembers}) => {
   const [memberData, setMemberData] = useState({
     first_name: '',
     last_name: '',
     email: '',
     address: '',
   });
+
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,17 +22,39 @@ const MemberForm = ({ onAddMember }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // בכאן תוכל להוסיף לוגיקה נוספת לטיפול בכפתור שלח
-    onAddMember(memberData);
-    // אפשר גם לאפס את הטופס לאחר הוספה
-    setMemberData({
-      first_name: '',
-      last_name: '',
-      email: '',
-      address: '',
-    });
+
+const jsonMembersData = JSON.stringify(memberData)
+console.log(jsonMembersData);
+    try {
+      const response = await axios.post('/members',jsonMembersData );
+      addMembers();
+      console.log('Response from server:', response.data);
+
+      
+      
+      setMemberData({
+        first_name: '',
+        last_name: '',
+        email: '',
+        address: '',
+      });
+    } catch (error) {
+      console.error('Error adding member:', error);
+      
+      // טיפול בשגיאה מהשרת
+      if (error.response) {
+        // השגיאה מכילה תגובה מהשרת עם קוד HTTP וגוף התגובה
+        setError(`Error: ${error.response.status} - ${error.response.data.message}`);
+      } else if (error.request) {
+        // אין תגובה מהשרת
+        setError('No response from server');
+      } else {
+        // שגיאה בזמן יצירת הבקשה
+        setError(`Error: ${error.message}`);
+      }
+    }
   };
 
   return (
@@ -72,6 +98,7 @@ const MemberForm = ({ onAddMember }) => {
         />
       </label>
       <button type="submit">שלח</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </form>
   </div>);
 };
