@@ -24,8 +24,8 @@ const MembersG = () => {
     }
   };
   const addMembers = (newMembers) => {
-    setMembersData((prev) => [...prev, newMembers])
-  }
+fetchMembersData() 
+ }
 
 
   const handleAddition = async (memberId) => {

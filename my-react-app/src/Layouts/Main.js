@@ -12,6 +12,8 @@ import TimesG from '../gabai/Times/TimesG';
 import DonationsG from '../gabai/Donation/DonationsG';
 import MembersG from '../gabai/members/MembersG';
 import NavbarG from '../gabai/Layouts/NavbarG';
+import Login from '../gabai/Layouts/Login';
+import GabaiList from '../gabai/GabaiList';
 
 function Main() {
 
@@ -36,12 +38,15 @@ function Main() {
                     <Route path='/donations' element={<Donations/>} />
                     <Route path='/members' element={<Members/>} />
                 </Route>
+                
                 <Route path="/gabai/" element={<NavbarG/>}>
+                    <Route path="/gabai/login" element={<Login />}/>
                     <Route path="/gabai/home" element={<HomeG/>} />
                     <Route path='/gabai/news' element={<NewsG/>} />
                     <Route path='/gabai/times' element={<TimesG/>} />
                     <Route path='/gabai/donations' element={<DonationsG/>} />
                     <Route path='/gabai/members' element={<MembersG/>} />
+                    <Route path='/gabai/gabais' element={<GabaiList/>} />
                 </Route>
                 {/* <Route path='*' element={<NotFoundPage />} /> */}
             </Routes>

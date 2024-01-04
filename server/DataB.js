@@ -22,19 +22,20 @@ class DatabaseFunctions {
             return error;
         }
     }
-    async putArticalHome(id, article) {
+    async putArticalHome( article) {
+        console.log("ooooooooooo"+article);
         try {
             const res = await this.pool.query(`
                 UPDATE artical_home 
                 SET title = ?, content = ?, images = ?
                 WHERE id = ?`,
-                [article.title, article.content, article.images, id]);
+                [article.title, article.content, article.images, 2]);
     
             if (res.affectedRows === 0) {
                 throw new Error(`Article with ID ${id} not found`);
             }
     
-            return { ...article, id };
+            return { ...article, id:res.insertId };
         } catch (error) {
             console.log(error);
             return error;
@@ -71,7 +72,7 @@ class DatabaseFunctions {
     }
     async getNews() {
         try {
-            const [[result]] = await this.pool.query(`SELECT * FROM news`);
+            const [result] = await this.pool.query(`SELECT * FROM news`);
             console.log(result);
             return result;
         } catch (error) {
@@ -81,7 +82,7 @@ class DatabaseFunctions {
     }
     async getTimes() {
         try {
-            const [[result]] = await this.pool.query(`SELECT * FROM times`);
+            const [result] = await this.pool.query(`SELECT * FROM times`);
             console.log(result);
             return result;
         } catch (error) {
@@ -103,7 +104,7 @@ class DatabaseFunctions {
 
     async getDonations() {
         try {
-            const [[result]] = await this.pool.query(`SELECT * FROM donations`);
+            const [result] = await this.pool.query(`SELECT * FROM donations`);
             console.log(result);
             return result;
         } catch (error) {
@@ -114,10 +115,22 @@ class DatabaseFunctions {
 
     async setMember(member) {
         try {
+            // בדיקה אם כבר קיים חבר עם אותה כתובת מייל
+            const [existingMember] = await this.pool.query(`
+                SELECT id FROM members
+                WHERE email = ?`,
+                [member.email]);
+    
+            if (existingMember.length > 0) {
+                throw new Error(`Member with email ${member.email} already exists`);
+            }
+    
+            // הוספת החבר למסד הנתונים
             const res = await this.pool.query(`
                 INSERT INTO members (first_name, last_name, email, address, phone, is_v) 
                 VALUES (?, ?, ?, ?, ?, ?)`,
                 [member.first_name, member.last_name, member.email, member.address, member.phone, member.is_v]);
+    
             return { ...member, id: res[0].insertId };
         } catch (error) {
             console.log(error);
@@ -162,13 +175,14 @@ class DatabaseFunctions {
     
 
     async addArticalNews(article) {
+        console.log("ooo"+article.date);
         try {
             const res = await this.pool.query(`
                 INSERT INTO news ( date, title, content, author,images) 
                 VALUES (?, ?, ?, ?, ?)`,
                 [article.date, article.title, article.content, article.author, article.images]);
 
-            return { ...article, id: res.insertId };
+            return { ...article, id: res[0].insertId };
         } catch (error) {
             console.log(error);
             return error;
@@ -229,10 +243,12 @@ class DatabaseFunctions {
 
 
     async putTimes(id, times) {
+        console.log(id);
+        console.log(times);
         try {
             const res = await this.pool.query(`
                 UPDATE times 
-                SET name = ?, time = ?, is_sabbas = ?
+                SET name = ?, time = ?, is_sabbath = ?
                 WHERE id = ?`,
                 [times.name, times.time, times.is_sabbath, id]);
 
@@ -263,11 +279,12 @@ class DatabaseFunctions {
         }
     }
     async addDonation(donation){
+        console.log(donation.image);
         try {
             const res = await this.pool.query(`
-                INSERT INTO donations (title, content,how ,images) 
+                INSERT INTO donations (title, content, how ,images) 
                 VALUES (?, ?, ?, ?)`,
-                [donation.title, donation.content, donation.images]);
+                [donation.title, donation.content,donation.how, donation.image]);
 
             return { ...donation, id: res.insertId };
         } catch (error) {
@@ -281,7 +298,7 @@ class DatabaseFunctions {
             UPDATE donations
             SET  title =?, content = ? ,how = ?  ,images = ? 
                 WHERE id = ?`,
-                [donation.title, donation.content,donation.how, donation.images,  id]);
+                [donation.title, donation.content, donation.how, donation.image,  id]);
 
             return { ...donation, id: res.insertId };
         } catch (error) {
@@ -303,57 +320,71 @@ class DatabaseFunctions {
             return error;
         }
     }
+    
+    
     async addGabai(gabai) {
         try {
-            const res = await this.pool.query(`
-                INSERT INTO gabais (member_id, user_id, password) 
-                VALUES (?, ?, ?)`,
-                [gabai.member_id, gabai.user_id, gabai.password]);
+            // בדיקה אם יש חבר עם השם והסיסמה שהתקבלו
+            const [memberResult] = await this.pool.query(`
+                SELECT id FROM members
+                WHERE  email = ?`,
+                [ gabai.email]);
     
-            return { ...gabai, id: res.insertId };
+            if (memberResult.length === 0) {
+                throw new Error(`Member with name ${gabai.name} and email ${gabai.email} not found`);
+            }
+    
+            const memberId = memberResult[0].id;
+    console.log(memberId);
+            const [existingGabai] = await this.pool.query(`
+            SELECT member_id FROM gabais
+            WHERE member_id = ?`,
+            [memberId]);
+
+        if (existingGabai.length > 0) {
+            throw new Error(`הגבאי רשום במערכת כבר`);
+        }
+            // במקרה שיש חבר כזה, נעדכן את הגבאי
+            const updateRes = await this.pool.query(`
+            INSERT INTO gabais (member_id , user_id , password) 
+            VALUES (?, ?, ?)`,
+                [memberId, gabai.name, gabai.password]);
+    
+            if (updateRes.affectedRows === 0) {
+                throw new Error(`Gabai with ID ${gabai.id} not found`);
+            }
+            return { ...gabai, member_id: updateRes[0].insertId };
         } catch (error) {
             console.log(error);
             return error;
         }
     }
     
-    async putGabai(id, gabai) {
-        try {
-            const res = await this.pool.query(`
-                UPDATE gabais 
-                SET member_id = ?, user_id = ?, password = ?
-                WHERE id = ?`,
-                [gabai.member_id, gabai.user_id, gabai.password, id]);
     
-            if (res.affectedRows === 0) {
-                throw new Error(`Gabai with ID ${id} not found`);
+    async deleteGabaiByEmail(id) {
+        try {
+         
+            // מחק את הגבאי בטבלת gabais לפי ה-ID של החבר
+            const gabaiResult = await this.pool.query('DELETE FROM gabais WHERE member_id = ?', [id]);
+    
+            if (gabaiResult.affectedRows === 0) {
+                throw new Error(`Gabai with id ${id} not found in gabais`);
             }
     
-            return { ...gabai, id };
-        } catch (error) {
-            console.log(error);
-            return error;
-        }
-    }
-    
-    async deleteGabai(id) {
-        try {
-            const res = await this.pool.query(`DELETE FROM gabais WHERE id = ?`, [id]);
-    
-            if (res.affectedRows === 0) {
-                throw new Error(`Gabai with ID ${id} not found`);
-            }
-    
-            return `Gabai with ID ${id} deleted successfully!`;
+            return { success: true, message: `Gabai with id ${id} deleted successfully!` };
         } catch (error) {
             console.error(error);
-            return error;
+            throw { success: false, message: error.message };
         }
     }
     
     async getGabais() {
         try {
-            const [result] = await this.pool.query(`SELECT * FROM gabais`);
+            const [result] = await this.pool.query(`
+            SELECT gabais.user_id, members.email, members.first_name, members.last_name, members.id
+            FROM gabais
+            JOIN members ON gabais.member_id = members.id
+        `);
             console.log(result);
             return result;
         } catch (error) {
@@ -361,8 +392,29 @@ class DatabaseFunctions {
             return error;
         }
     }
-    
+    async checkGabai(credentials) {
+        try {
+            // בדיקה האם יש גבאי עם שם משתמש וסיסמה כפי שהתקבלו מהאובייקט
+            const [result] = await pool.query(`
+                SELECT * FROM gabais
+                WHERE user_id = ? AND password = ?`,
+                [credentials.user_id, credentials.password]);
+    console.log(result);
+            // אם יש גבאי עם השם משתמש והסיסמה, תחזיר את הגבאי
+            if (result.length > 0) {
+                return result[0];
+            } else {
+                // אחרת, תחזיר `null` או הודעה שאין גבאי כזה
+                return null;
+            }
+        } catch (error) {
+            console.error(error);
+            // במקרה של שגיאה, תחזיר את השגיאה
+            return error;
+        }
+    }
 }
+
 
 const dbFunctions = new DatabaseFunctions(pool);
 

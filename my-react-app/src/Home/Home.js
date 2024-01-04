@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../component/Axios';
 import Article from '../component/Article';
-import michaelImg from '../assets/images/michael_haviv.png';
-import biet_knesetImg from '../assets/images/biet_kneset.png';
 
 function Home() {
     const [articleData, setArticleData] = useState(null);

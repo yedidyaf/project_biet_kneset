@@ -1,0 +1,93 @@
+.form-container {
+  background: linear-gradient(to bottom, #f9d976, #f39f86);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 2px 2px 10px #ddd;
+  animation: slide-down 0.5s ease;
+  /* width: 80%; */
+ 
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0); 
+  }
+}
+
+.form-group {
+  margin-bottom: 15px; 
+}
+
+.label {
+  display: block;
+  color: #674188;
+  font-weight: bold;
+}
+
+.text-input,
+.textarea-input {
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+  outline: none;
+  background: rgba(255,255,255,0.3);
+  transition: background 0.3s;
+}
+
+.text-input:focus,  
+.textarea-input:focus {
+  background: white;
+}
+
+.submit-button {
+  background: #674188; 
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;  
+}
+
+.submit-button:hover {
+  background: #4d2d6a;
+}
+
+.file-input::before {
+  /* content: url('images/upload.svg');  */
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.image-preview {
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px #ddd;
+}
+.form-container {
+  position: relative;
+}
+
+.form-container::before {
+  content: '';
+  /* background: url('images/flower.png') no-repeat; */
+  position: absolute;
+  width: 80px; 
+  height: 80px;
+  top: -20px;
+  right: -30px;
+}
+
+.form-container::after {
+  content: '';
+  /* background: url('images/bird.png') no-repeat;  */
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  top: 30px;
+  left: -20px;   
+}

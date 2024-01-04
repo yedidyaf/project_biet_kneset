@@ -1,107 +1,25 @@
-import michaelImg from '../../assets/images/michael_haviv.png';
-import biet_knesetImg from '../../assets/images/biet_kneset.png';
-// import CardComponent from "../../component/CardComponent";
-import AllCardsG from './AllCardsG.js'
-import { useEffect, useState } from 'react';
-import AddArticleG from './AddArticaleG.js';
+import React, { useEffect, useState } from 'react';
+import axios from '../../component/Axios';
+import CardComponent from '../../component/CardComponent';
+import AddArticleG from './AddArticaleG';
+import AllCards from '../../component/AllCards';
+import AllCardsG from './AllCardsG';
 
-function NewsG() {
-    console.log("u");
-    // const [arrArticles_, setArrArticles] = useState([]);
-
-    // useEffect(() => {
-    //     // ביצוע בקשת GET כאשר הקומפוננטה נטענת
-    //     axios.get('ה-URL-שלך-כאן')
-    //         .then(response => {
-    //             // עדכון הסטייט עם המידע מהשרת
-    //             setArrArticles(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching data:', error);
-    //         });
-    // }, []);
-
-    const arrArticles = [
-        {
-            id: 2, title: "בית הכנסת תל גיבורים",
-            content: `
-    בית מדרש "חסדי יוסף" - בית חם ללומדי תורה
-    
-    בימים של מגפה וסכנה חיצונית התאחדו בחורים מהשכונה ללמוד יחדיו בבית מדרש ארעי, ליד ביתו של הגאון רבי יוסף צדיק זצ"ל. 
-    בכל יום מצאו עוד יהודים את דרכם לאותו בית מדרש קטן אך חם, לשבת ולעסוק בתורה הקדושה בצוותא. 
-    
-    עם חלוף הסכנה ודעיכת המגפה, הפך אותו אוהל קטן למרכז תורני תוסס ומשגשג בלב השכונה. בכל שעות היום ניתן למצוא בו לומדים 
-    השקועים בעמלה של תורה - החל מתינוקות של בית רבן וכלה באברכים היושבים על ארבע אמות של הלכה.  
-    
-    כולם מוזמנים להצטרף לחבורה - ללמוד, 
-    לדון בסוגיות הפרשה, או פשוט לשתות חמין בצוותא ולחזק את הלבבות.
-    
-    ברכת "המרבה השלום" על כל אחינו בני ישראל!`,
-            author: "חיים זלמנוביץ", images: [michaelImg, biet_knesetImg], date: "1990"
-        },
-        {
-            id: 3, title: "בית הכנסת תל גיבורים",
-            content: `
-    בית מדרש "חסדי יוסף" - בית חם ללומדי תורה
-    
-    בימים של מגפה וסכנה חיצונית התאחדו בחורים מהשכונה ללמוד יחדיו בבית מדרש ארעי, ליד ביתו של הגאון רבי יוסף צדיק זצ"ל. 
-    בכל יום מצאו עוד יהודים את דרכם לאותו בית מדרש קטן אך חם, לשבת ולעסוק בתורה הקדושה בצוותא. 
-    
-    עם חלוף הסכנה ודעיכת המגפה, הפך אותו אוהל קטן למרכז תורני תוסס ומשגשג בלב השכונה. בכל שעות היום ניתן למצוא בו לומדים 
-    השקועים בעמלה של תורה - החל מתינוקות של בית רבן וכלה באברכים היושבים על ארבע אמות של הלכה.  
-    
-    כולם מוזמנים להצטרף לחבורה - ללמוד, 
-    לדון בסוגיות הפרשה, או פשוט לשתות חמין בצוותא ולחזק את הלבבות.
-    
-    ברכת "המרבה השלום" על כל אחינו בני ישראל!`,
-            author: "חיים זלמנוביץ", images: [michaelImg, biet_knesetImg]
-        },
-        {
-            id: 4, title: "בית הכנסת תל גיבורים",
-            content: `
-    בית מדרש "חסדי יוסף" - בית חם ללומדי תורה
-    
-    בימים של מגפה וסכנה חיצונית התאחדו בחורים מהשכונה ללמוד יחדיו בבית מדרש ארעי, ליד ביתו של הגאון רבי יוסף צדיק זצ"ל. 
-    בכל יום מצאו עוד יהודים את דרכם לאותו בית מדרש קטן אך חם, לשבת ולעסוק בתורה הקדושה בצוותא. 
-    
-    עם חלוף הסכנה ודעיכת המגפה, הפך אותו אוהל קטן למרכז תורני תוסס ומשגשג בלב השכונה. בכל שעות היום ניתן למצוא בו לומדים 
-    השקועים בעמלה של תורה - החל מתינוקות של בית רבן וכלה באברכים היושבים על ארבע אמות של הלכה.  
-    
-    כולם מוזמנים להצטרף לחבורה - ללמוד, 
-    לדון בסוגיות הפרשה, או פשוט לשתות חמין בצוותא ולחזק את הלבבות.
-    
-    ברכת "המרבה השלום" על כל אחינו בני ישראל!`,
-            author: "חיים זלמנוביץ", images: [michaelImg, biet_knesetImg]
-        },
-        {
-            id: 5, title: "בית הכנסת תל גיבורים",
-            content: `
-    בית מדרש "חסדי יוסף" - בית חם ללומדי תורה
-    
-    בימים של מגפה וסכנה חיצונית התאחדו בחורים מהשכונה ללמוד יחדיו בבית מדרש ארעי, ליד ביתו של הגאון רבי יוסף צדיק זצ"ל. 
-    בכל יום מצאו עוד יהודים את דרכם לאותו בית מדרש קטן אך חם, לשבת ולעסוק בתורה הקדושה בצוותא. 
-    
-    עם חלוף הסכנה ודעיכת המגפה, הפך אותו אוהל קטן למרכז תורני תוסס ומשגשג בלב השכונה. בכל שעות היום ניתן למצוא בו לומדים 
-    השקועים בעמלה של תורה - החל מתינוקות של בית רבן וכלה באברכים היושבים על ארבע אמות של הלכה.  
-    
-    כולם מוזמנים להצטרף לחבורה - ללמוד, 
-    לדון בסוגיות הפרשה, או פשוט לשתות חמין בצוותא ולחזק את הלבבות.
-    
-    ברכת "המרבה השלום" על כל אחינו בני ישראל!`,
-            author: "חיים זלמנוביץ", images: [michaelImg, biet_knesetImg], date: 'jjj'
-        }
-    ] 
-const onAddArticle = (article) =>{
-    console.log(article);
-}
-    const deleteArtical = (id)=>{
-console.log(id);
-    }
-    return (<> <AllCardsG title={"חדשות "} cardsData={arrArticles} deleteArtical={deleteArtical} />
-    <AddArticleG title={"הוסף כתבה"}  onAddArticle = {onAddArticle}/> 
-    </>);
-}
+const NewsG = () => {
+  
+  const [addA, setAddA] = useState(false);
+  const onAddArticle=()=>{
+    setAddA((prev)=>!prev)
+  };
+  return (<div>
+    <AllCardsG title={"חדשות"}
+    AddArticle = {onAddArticle}/>
+      <button onClick={()=>{setAddA((prev)=>!prev)}}>הוסף כתבה</button>
+      {addA&&<AddArticleG title={"הוסף כתבה"}
+        onAddArticle={onAddArticle}
+        path={'/gabai/news'} />}
+    </div>
+  );
+};
 
 export default NewsG;
-// CardComponent.jsx
-

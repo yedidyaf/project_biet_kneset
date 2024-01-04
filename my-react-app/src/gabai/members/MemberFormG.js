@@ -28,7 +28,7 @@ const MemberFormG = ({addMembers}) => {
 const jsonMembersData = JSON.stringify(memberData)
 console.log(jsonMembersData);
     try {
-      const response = await axios.post('/members',jsonMembersData );
+      const response = await axios.post('/gabai/members',jsonMembersData );
       addMembers(response)
       console.log('Response from server:', response.data);
 

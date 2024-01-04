@@ -20,6 +20,7 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
     // הפעולה שתתבצע כאשר המשתמש לוחץ שלח בטופס
     const formData = {
       name,
@@ -29,21 +30,23 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
 
     if (editMode) {
       // במצב עריכה, שלח פעולת PUT
+      
       onFormSubmit('PUT', selectedPrayerId, formData);
       setName('');
       setTime('');
-      setIsSabbath(null);
+      setIsSabbath(false);
 
 
     } else {
+     
       // במצב הוספה, שלח פעולת POST
-      onFormSubmit('POST', null, formData);
+      onFormSubmit('add', null, formData);
       setName('');
       setTime('');
-      setIsSabbath(null);
+      setIsSabbath(false);
     }
   };
-
+ console.log(isSabbath);
   return (
     <form onSubmit={handleSubmit}>
       <label>

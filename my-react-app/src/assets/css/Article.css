@@ -44,6 +44,18 @@
     }
   
   }
+  .delete-button{
+    background-color:#ba2828 ;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .delete-button:hover {
+    background-color: #555;
+  }
   .close-button {
     background-color: #333;
     color: #fff;

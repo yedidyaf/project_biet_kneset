@@ -23,7 +23,7 @@ const AllCards = ({ title, cardsData }) => {
       {selectedArticle ? (
         <Article article = {selectedArticle} onClose={handleCloseArticle} />
       ):<div className="cards-container">
-      {cardsData.map((card) => (
+      {cardsData && cardsData.map((card) => (
           <CardComponent key={card.id} data={card} onClick={() => handleCardClick(card)} />
         ))}</div>}
     </div>

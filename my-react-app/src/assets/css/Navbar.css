@@ -1,18 +1,62 @@
+/* סגנון לתמונת הלוגו */
+.navbar {
+  position: fixed;
+   top: 10px;
+  right: 0;
+  left: 0; 
+  background-color: #fff; 
+  z-index: 1000; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+.logo {
+  position: fixed;
+  top: 10px;
+  right: 60px;
+  width: 10%;
+  border: 5px solid #e67e22; /* כתום */
+  border-radius: 50%;
+  padding: 3px;
+}
+main {
+  margin-top: 100px;
+}
+/* סגנון לקישורים (כפתורים) בתפריט */
 .nav-btn {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-  }
+  /* position: fixed; */
+  display: inline-block;
+  padding: 10px 15px;
+  color: #f1c40f;
+  margin: 10px; /* מרווח בין הכפתורים */
+  background-color: #9b59b6;
   
-  .nav-btn:hover {
-    background-color: #45a049;
-  }
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px; /* קצות מעוגלות */
+}
+
+/* הסגנון הוא עבור כל קישור שיש לו תכונה "nav-btn" */
+.nav-btn:hover {
+  background-color: #713b87; 
+}
+
+/* עיצוב כללי לדף */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+/* סגנון למילוי רקע לתפריט */
+.prayer-times {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+.logo-container {
+  float: right;
+  margin-right: 20px;
+}
+.nav-links {
+  float: left;
+  margin-left: 20px; 
+  position: fixed;
+}
