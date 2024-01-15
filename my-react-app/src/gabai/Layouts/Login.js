@@ -3,24 +3,22 @@ import { useNavigate } from 'react-router-dom'; // הייבוא עודכן
 import '../../assets/css/Login.css'; 
 import axios from '../../component/Axios';
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [user_id, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate(); // שימוש עודכן
 
   const handleLogin = async () => {
+    
     try {
+      console.log(user_id,password);
       // הוסף קוד לשליחת בקשה לשרת לבדיקת משתמש
       // נניח שיש נתיב '/api/login' בשרת שצפה לקבל נתונים בפורמט JSON
-      const response = await axios('/api/gabai/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
+      const response = await axios.post('/api/gabai/login', 
+       { user_id, password}
+      );
+console.log(response);
+      if (response.status===200) {
         // אם התחברות מוצלחת, מעביר לעמוד הבית של הגבאי
         navigate('/gabai/home');
       } else {
@@ -41,7 +39,7 @@ const Login = () => {
           שם משתמש:
           <input
             type="text"
-            value={username}
+            value={user_id}
             onChange={(e) => setUsername(e.target.value)}
             className="login-input"
           />

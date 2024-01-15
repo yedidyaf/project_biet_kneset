@@ -1,6 +1,7 @@
 .members-container {
     max-width: 800px;
     margin: 20px auto;
+    color: rgb(110, 241, 241);
   }
   
   .members-table {
@@ -18,11 +19,11 @@
   }
   
   .members-table th {
-    background-color: #3498db;
+    background-color: #925454;
     color: #fff;
   }
   
   .members-table tr:hover {
-    background-color: #f5f5f5;
+    background-color: #925454;
   }
   

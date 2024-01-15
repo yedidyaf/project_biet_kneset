@@ -6,7 +6,7 @@
   }
   
   .all-cards-title {
-    font-size: 2em;
+    font-size: 4em;
     margin-bottom: 20px;
     color: #333;
   }
@@ -41,11 +41,12 @@
   .card-title {
     font-size: 1.5em;
     margin: 10px 0;
+    color: rgb(227, 204, 223);
   }
   
   .card-content {
     margin: 0;
-    color: #333;
+    color: #d5bbbb;
   }
   
   .card-author {
@@ -56,7 +57,7 @@
   @media (min-width: 768px) {
     /* עמוד מחשב - 4 ריבועים בשורה */
     .card {
-      width: calc(20% - 20px);
+      width: calc(30% - 20px);
     }
   
     &:nth-child(4n) {

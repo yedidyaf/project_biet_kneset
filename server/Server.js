@@ -7,6 +7,8 @@ import dbFunctions from '../server/DataB.js';
 import handleImages from './handleImages.js';
 import { format } from 'date-fns';
 import nodemialer from 'nodemailer'
+import { fetchData } from './getZmanim.js';
+
 const app = express();
 console.log("kkkk");
 // const upload = multer({ dest: 'uploads/' })
@@ -40,6 +42,16 @@ app.get("/news", async (req, res) => {
 app.get("/times", async (req, res) => {
     try {
         const times = await dbFunctions.getTimes();
+        res.status(200).send(times);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+app.get("/times/day_times", async (req, res) => {
+    try {
+        const times = await dbFunctions.getDayTimes();
         res.status(200).send(times);
     } catch (error) {
         console.error(error);
@@ -329,7 +341,7 @@ app.put('/gabai/donations/:id', upload.single('file'), async (req, res) => {
 
         updatedDonation.image = JSON.stringify(updatedDonation.image);
         console.log(updatedDonation.image);
-        const response = await dbFunctions.putDonation(req.params.id,updatedDonation);
+        const response = await dbFunctions.putDonation(req.params.id, updatedDonation);
         res.status(200);
         res.send(response);
     } catch (error) {
@@ -351,9 +363,10 @@ app.delete('/gabai/donations/:id', async (req, res) => {
 
 
 app.post("/api/gabai/login", async (req, res) => {
+    console.log(req.body);
     try {
         const response = await dbFunctions.checkGabai(req.body);
-console.log(response);
+        console.log(response);
         if (response) {
             // אם יש גבאי כזה, תשלח תשובה 200 עם הגבאי
             res.status(200).json(response);
@@ -442,21 +455,21 @@ app.get('/api/getImage', async (req, res) => {
 });
 
 app.listen(port);
- const transporter = nodemialer.createTransport({
-            service: 'gmail',
-            host:"smtp.gmail.com", 
-            port: 587,
-            secure:false,
-            auth: {
-                user: 'bktgxo@gmail.com', // האימייל שלך
-                pass: process.env.EMAIL_PASSWORD // הסיסמה שלך
-            }
-        });
+const transporter = nodemialer.createTransport({
+    service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+        user: 'bktgxo@gmail.com', // האימייל שלך
+        pass: process.env.EMAIL_PASSWORD // הסיסמה שלך
+    }
+});
 async function sendEmail(senderEmail, recipientEmail, subject, message) {
     console.log(sendEmail);
     try {
         // הגדר את התצורה של ה-transporter (המאפשר לשלוח מיילים)
-       
+
 
         // הגדר את פרטי המייל
         const mailOptions = {
@@ -476,4 +489,4 @@ async function sendEmail(senderEmail, recipientEmail, subject, message) {
         return 'Error sending email';
     }
 }
-sendEmail('bktgxo@gmail.com','fyedidya321@gmail.com','שלום',"icrfv")
+// sendEmail('bktgxo@gmail.com','fyedidya321@gmail.com','שלום',"icrfv")

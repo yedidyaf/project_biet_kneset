@@ -393,6 +393,7 @@ class DatabaseFunctions {
         }
     }
     async checkGabai(credentials) {
+        console.log(credentials);
         try {
             // בדיקה האם יש גבאי עם שם משתמש וסיסמה כפי שהתקבלו מהאובייקט
             const [result] = await pool.query(`
@@ -402,8 +403,10 @@ class DatabaseFunctions {
     console.log(result);
             // אם יש גבאי עם השם משתמש והסיסמה, תחזיר את הגבאי
             if (result.length > 0) {
+                
                 return result[0];
             } else {
+                
                 // אחרת, תחזיר `null` או הודעה שאין גבאי כזה
                 return null;
             }
@@ -413,10 +416,57 @@ class DatabaseFunctions {
             return error;
         }
     }
+
+
+
+    async addDayTimes(data) {
+        try {
+            const res = await this.pool.query(`
+                INSERT INTO day_times 
+                (alotHaShachar, misheyakir, sunrise, sofZmanShma, sofZmanShmaMGA, 
+                 sofZmanTfilla, sofZmanTfillaMGA, chatzot, sunset, tzeit7083deg) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                    data.alotHaShachar,
+                    data.misheyakir,
+                    data.sunrise,
+                    data.sofZmanShma,
+                    data.sofZmanShmaMGA,
+                    data.sofZmanTfilla,
+                    data.sofZmanTfillaMGA,
+                    data.chatzot,
+                    data.sunset,
+                    data.tzeit7083deg
+                ]);
+
+            return { ...data, id: res.insertId };
+        } catch (error) {
+            console.error(error);
+            return error;
+        }
+    }
+
+    async getDayTimes() {
+        try {
+            const [result] = await this.pool.query(`
+                SELECT * FROM day_times`);
+    
+            if (result.length === 0) {
+                throw new Error('No day times data found');
+            }
+    
+            // החזרת הנתונים מהשאילתה
+            return result[0];
+        } catch (error) {
+            console.error(error);
+            return error;
+        }
+    }
 }
 
 
 const dbFunctions = new DatabaseFunctions(pool);
+
 
 export default dbFunctions;
 

@@ -45,11 +45,9 @@ const AllCardsG = ({ title, AddArticle }) => {
 
   return (
     <div className="all-cards">
-      <h1 className="all-cards-title">{title}</h1>
+      {!selectedArticle&& <h1 className="all-cards-title">{title}</h1>}
       <div className="cards-container">
-        {/* {cardsData.map((card) => (
-          <CardComponent key={card.id} data={card} onDelete={AddArticle} />
-        ))} */}
+       
       </div>
 
       {selectedArticle ? (

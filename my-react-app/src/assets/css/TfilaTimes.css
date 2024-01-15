@@ -1,76 +1,42 @@
-/* .prayer {
-    max-width: 500px;
-    margin: 0 auto;
-    box-shadow: 0 0 10px #ddd;
-  }
+.prayer-times {
+  background: linear-gradient(to right, #c7a708, #e4c496); 
+  padding: 70px;
+  border-radius: 10px;
+  margin: 40px;  
+  /* position: relative; */
+  /* overflow: hidden; */
+}
+
+.frame {
+  background: rgba(255, 255, 255, 0.3); 
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 70px;  
+  transition: transform 0.3s ease;  
   
-  .frames {
-    background: #eee; 
-    border-radius: 4px;
-  }
-  
-  .frame {
-    background: white;
-    padding: 10px; 
-  }
-  
-  h3 {
-    font-size: 18px;
-    margin-top: 0;  
-  }
-  
-  table {
-    width: 100%; 
-    border-collapse: collapse;
-  }
-  
-  td {
-    padding: 6px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  } */
+}
+
+.frame:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}   
+
+h3 {
+  text-align: center;
+  color: rgb(63, 51, 227);
+  font-family: Varela Round, sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 
+    1px 0px 1px #bf830a,
+    0px 1px 1px #dfa60a,  
+    2px 2px 1px #0d0d0d,
+    1px 2px 1px #0a1c68,
+    2px 1px 1px #8f7505,
+    2px 3px 1px #bc6a17;
+}
+
+/* איורים */
 
 
 
-  .prayer-times {
-    max-width: 50%;
-    margin: 30px auto;
-    background: #f6f4f4;  
-    padding: 20px;
-    border-radius: 8px;
-    flex: 2;
-  }
-  
-  @media (max-width: 768px) {
-    .prayer-times {
-      max-width: 100%; 
-    }
-  }  
-  
-  .frame {
-    background: white; 
-    padding: 20px;
-    border-radius: 8px;
-    font-family: Verdana, sans-serif;  
-  }
-  
-  .frame:first-child {
-    background: #eee; 
-  }
-  
-  h3 {
-    font-size: 30px;
-    margin-top: 0;
-  }  
-  
-  table {
-    width: 100%;
-    margin-top: 10px;
-  }
-   td {
-    padding: 6px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
-   
- 
+/* נוסף... */

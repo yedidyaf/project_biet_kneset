@@ -1,47 +1,71 @@
-import React from "react";
-import '../assets/css/TfilaTimes.css'
-const TfilaTimes = ({ ArrTfilaTimes }) => {
-    console.log(ArrTfilaTimes);
-  const weekday = ArrTfilaTimes.filter(x => !x.is_sabbath); 
-  const sabbath = ArrTfilaTimes.filter(x => x.is_sabbath);
+// TfilaTimesG.jsx
+import React, { useState, useEffect } from "react";
+import axios from '../component/Axios';
+
+import '../assets/css/TfilaTimes.css';
+
+const TfilaTimes = () => {
+  const [ArrTfilaTimes, setArrTfilaTimes] = useState([]);
+  const [weekday, setWeekday] = useState([]);
+  const [sabbath, setSabbath] = useState([]);
+
+  useEffect(() => {
+    fetchPrayerTimes();
+  }, []);
+
+  const fetchPrayerTimes = async () => {
+    try {
+      const response = await axios.get('/gabai/times');
+      const fetchedArrTfilaTimes = response.data;
+
+      const fetchedWeekday = fetchedArrTfilaTimes.filter(x => !x.is_sabbath);
+      const fetchedSabbath = fetchedArrTfilaTimes.filter(x => x.is_sabbath);
+
+      setArrTfilaTimes(fetchedArrTfilaTimes);
+      setWeekday(fetchedWeekday);
+      setSabbath(fetchedSabbath);
+    } catch (error) {
+      console.error('שגיאה בקבלת זמני תפילה:', error);
+    }
+  };
+  
 
   return (
     <div className="prayer-times">
       
-        
         <div className="frame">
+          <h3 className="title">זמני תפילות (ימות חול)</h3>
+          <table className="table">
+            <tbody>
+              {weekday&& weekday.map(prayer => (
+                <tr key={prayer.id}>
+                  <td className="cell">{prayer.name}</td>
+                  <td className="cell">{prayer.time}</td>
+                  <td>
 
-  <h3>זמני תפילות (ימות חול)</h3>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>  
+      
 
-  <table>
-    <tbody>
-      {weekday.map(prayer => (
-        <tr key={prayer.id}>
-          <td>{prayer.name}</td>
-          <td>{prayer.time}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-
-</div>
-
-<div className="frame">
-
-  <h3>זמני תפילות (שבת)</h3>
-           
-  <table>
-    <tbody>
-      {sabbath.map(prayer => (
-        <tr key={prayer.id}>
-          <td>{prayer.name}</td>
-          <td>{prayer.time}</td>
-        </tr>  
-      ))}
-    </tbody>
-  </table>
-
-</div>
+      <div className="frame">
+        <h3 className="title">זמני תפילות (שבת)</h3>
+        <table className="table">
+          <tbody>
+            {sabbath && sabbath.map(prayer => (
+              <tr key={prayer.id}>
+                <td className="cell">{prayer.name}</td>
+                <td className="cell">{prayer.time}</td>
+                <td>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       
     </div>
   );

@@ -1,9 +1,12 @@
 .login-container {
     text-align: center;
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #c79a56;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* width: 500px; */
+    margin: 0 auto;
+    width: 1000px;
   }
   
   .login-form {
@@ -20,7 +23,7 @@
   }
   
   .login-button {
-    background-color: #3498db;
+    background-color: #0b4266;
     color: #fff;
     padding: 15px 30px;
     border: none;
@@ -31,7 +34,7 @@
   }
   
   .login-button:hover {
-    background-color: #2980b9;
+    background-color: #306284;
   }
   
   .login-error {

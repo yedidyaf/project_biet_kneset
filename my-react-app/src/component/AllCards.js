@@ -17,7 +17,7 @@ const AllCards = ({ title, cardsData }) => {
 
   return (
     <div className="all-cards">
-      <h1 className="all-cards-title">{title}</h1>
+      {!selectedArticle && <h1 className="all-cards-title">{title}</h1>}
 
       
       {selectedArticle ? (

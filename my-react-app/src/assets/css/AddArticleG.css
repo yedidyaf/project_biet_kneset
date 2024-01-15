@@ -44,3 +44,22 @@
 .add-article-form button:hover {
   background-color: #2980b9;
 }
+.image-preview {
+  display: inline-block; 
+  margin: 5px;
+}
+
+.image-preview img {
+  width: 150px; 
+  height: 150px;
+  object-fit: cover; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px;  
+}
+
+.image-preview span {
+  display: block;
+  text-align: center;
+  font-size: 0.8em;
+}

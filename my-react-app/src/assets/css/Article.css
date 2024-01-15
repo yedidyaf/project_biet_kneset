@@ -1,36 +1,46 @@
 .article {
+    
+    margin: 10px;
     display: flex;
-    margin: 50px;
+    justify-content: center;
+    align-items: center;
   }
   
   .images {
     flex: 1;
-    margin-right: 50px; 
+    /* text-align: left; */
+     
   }
   
   .content {
     flex: 1;  
+    color: #0fab48; 
   }
   
   .title {
-    font-size: 32px;
-    margin: 0;  
+    font-size: 62px;
+    margin: 0; 
   }
   
   .text {
     margin-top: 30px;
-    font-size: 18px;
-    line-height: 1.8;  
+    font-size: 22px;
+    line-height: 2; 
+    color: aliceblue; 
   } 
   
   .date {
+    margin: 20px;
+    font-size: 18px;
     color: #999;
     font-style: italic;
   }
   
   .author { 
     text-align: right;
-    font-style: italic; 
+    font-style: italic;
+    font-size: 18px;
+    color: #999;
   }
   @media (max-width: 768px) {
 

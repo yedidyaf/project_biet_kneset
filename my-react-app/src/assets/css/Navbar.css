@@ -4,7 +4,7 @@
    top: 10px;
   right: 0;
   left: 0; 
-  background-color: #fff; 
+  background-color: #080808; 
   z-index: 1000; 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -26,9 +26,9 @@ main {
   /* position: fixed; */
   display: inline-block;
   padding: 10px 15px;
-  color: #f1c40f;
+  color: #151514;
   margin: 10px; /* מרווח בין הכפתורים */
-  background-color: #9b59b6;
+  background-color: #5a79e9;
   
   text-decoration: none;
   font-weight: bold;
@@ -37,20 +37,29 @@ main {
 
 /* הסגנון הוא עבור כל קישור שיש לו תכונה "nav-btn" */
 .nav-btn:hover {
-  background-color: #713b87; 
+  background-color: #996d21; 
 }
 
 /* עיצוב כללי לדף */
-body {
+/* body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-}
+} */
 
 /* סגנון למילוי רקע לתפריט */
 .prayer-times {
-  background-color: #f2f2f2;
+  background-color: #161111;
   padding: 20px;
 }
+
+
+/* body {
+  background: linear-gradient(-45deg, #ad5919, #0f0e0f, #060ba6, #d57023);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+} */
+
 .logo-container {
   float: right;
   margin-right: 20px;

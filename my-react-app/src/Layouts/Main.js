@@ -14,7 +14,7 @@ import MembersG from '../gabai/members/MembersG';
 import NavbarG from '../gabai/Layouts/NavbarG';
 import Login from '../gabai/Layouts/Login';
 import GabaiList from '../gabai/GabaiList';
-
+import '../assets/css/Main.css'
 function Main() {
 
     // const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || "");

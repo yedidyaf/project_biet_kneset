@@ -1,74 +1,59 @@
-/* .daily-times {
-    background: #f5f5f5;
-    padding: 20px;
-    width: 50px;
-    margin: 0 auto;   
-    border-radius: 12px;
-    flex: 1;
-  }
-  
-  .title {
-    font-size: 24px;  
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .table {
-    width: 100%;   
-    text-align: center;
-  }  */
-  
-  /* סטיילינג לתאים */
-  
-  /* אנימציות ואפקטים */
-
-
-
-
-
 .daily-times {
-    margin: 50px;
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
-    border-radius: 8px;
-    background: #fafafa;
-    padding: 20px; 
-    /* flex: 1; */
-  }
-  
-  .title {
-    text-shadow: 1px 1px 2px #ddd;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;  
-  }
-  
-  .cell {
-    padding: 8px;
-    font-size: 16px;  
-    border-bottom: 1px solid #eaeaea;
-  }  
-  
-  .table tr:last-child .cell {
-    border-bottom: none;
-  }
-  
-  .cell:first-child {
-    font-weight: 500;
-  }
-  
-  .daily-times:hover {
-    box-shadow: 1px 2px 8px rgba(0,0,0,0.25);  
-    transition: box-shadow 0.2s;
-  }
-  
-  .title {
-    transition: transform 0.1s ease-in;  
-  }
-  
-  .daily-times:hover .title {
-    transform: scale(1.05); 
-  }
+  background: linear-gradient(to bottom, #e4a769, #e1b894);
+  border-radius: 10px;
+  padding: 50px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);  
+  margin: 40px;  
+
+}
+
+.title {
+  font-family: 'Varela Round', sans-serif;
+  text-align: center;
+  color: #8f783d;
+  text-shadow: 1px 1px 2px #2980b9;  
+}
+
+.table {
+  width: 100%; 
+  border-collapse: collapse;  
+}
+
+.cell {
+  padding: 10px;
+  font-size: 18px; 
+  text-align: center; 
+  border-bottom: 2px dotted #141212;  
+}
+
+.cell:first-child {
+  color: #1f1e1a;
+  text-align: right;
+} 
+
+.cell:last-child {
+  color: #3f22e6;
+}
+
+/* הנפשות */
+.daily-times:hover {
+  background: linear-gradient(to left bottom, #f1c40f, #e67e22);  
+}
+
+.title:hover {
+  transform: scale(1.1); 
+}
+
+.cell:hover {
+  transform: translateY(-3px);
+  box-shadow: 3px 3px 6px #333;
+}
+
+/* רקע לכל שורה */  
+tr:nth-child(odd) .cell{
+  background: rgba(208, 149, 149, 0.05);
+}
+
+tr:nth-child(even) .cell{
+  background: rgba(0,0,0,0.05);
+}

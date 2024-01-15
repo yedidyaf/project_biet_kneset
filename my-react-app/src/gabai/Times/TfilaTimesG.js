@@ -71,13 +71,13 @@ const TfilaTimesG = () => {
     <div className="prayer-times">
       
         <div className="frame">
-          <h3>זמני תפילות (ימות חול)</h3>
-          <table>
+          <h3 className="title">זמני תפילות (ימות חול)</h3>
+          <table className="table">
             <tbody>
               {weekday&& weekday.map(prayer => (
                 <tr key={prayer.id}>
-                  <td>{prayer.name}</td>
-                  <td>{prayer.time}</td>
+                  <td className="cell">{prayer.name}</td>
+                  <td className="cell">{prayer.time}</td>
                   <td>
                     <button onClick={() => handleEditClick(prayer.id)}>עריכה</button>
                     <button onClick={() => handleDeleteClick(prayer.id)}>מחיקה</button>
@@ -91,13 +91,13 @@ const TfilaTimesG = () => {
       
 
       <div className="frame">
-        <h3>זמני תפילות (שבת)</h3>
-        <table>
+        <h3 className="title">זמני תפילות (שבת)</h3>
+        <table className="table">
           <tbody>
             {sabbath && sabbath.map(prayer => (
               <tr key={prayer.id}>
-                <td>{prayer.name}</td>
-                <td>{prayer.time}</td>
+                <td className="cell">{prayer.name}</td>
+                <td className="cell">{prayer.time}</td>
                 <td>
                   <button onClick={() => handleEditClick(prayer.id)}>עריכה</button>
                 </td>
