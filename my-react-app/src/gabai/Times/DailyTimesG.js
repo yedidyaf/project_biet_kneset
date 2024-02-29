@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../../component/Axios';
 import { DateTime } from 'luxon';
 import '../../assets/css/DailyTimes.css';
+import DateH from './DateH';
 
 const DailyTimesG = () => {
 
@@ -23,6 +24,8 @@ const DailyTimesG = () => {
   return (
     <div className="daily-times">
       <h2 className="title">זמני היום</h2>
+      <h4>לפי אופק בני - ברק</h4>
+     <DateH/>
       
       <table className="table">
         <tbody>

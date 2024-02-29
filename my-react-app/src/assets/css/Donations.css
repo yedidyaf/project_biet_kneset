@@ -1,7 +1,8 @@
 /* DonationComponent.css */
 .all-donations-container{
   background-color: #cf4545;
-
+width: 60%;
+margin: 0 auto;
 }
 .donation-container {
     background-color: #f5f5f5;
@@ -10,18 +11,20 @@
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 1000px;
+    width: 80%;
     margin: 0 auto;
-  
+  margin-top: 70px;
   }
   
   .donation-header {
+    /* padding: 30px; */
     text-align: center;
   }
   
   .donation-content {
     font-size: 1.2em;
     margin-top: 10px;
+    white-space: pre-wrap
   }
   
   .donation-images {

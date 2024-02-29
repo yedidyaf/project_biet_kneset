@@ -1,7 +1,7 @@
 // AddArticleG.jsx
 import React, { useState } from 'react';
 import '../../assets/css/AddArticleG.css';
-import axios from '../../component/Axios';
+import axios from '../component/Axios';
 
 const AddArticleG = ({ title, onAddArticle, path }) => {
   const [articleData, setArticleData] = useState({
@@ -10,13 +10,28 @@ const AddArticleG = ({ title, onAddArticle, path }) => {
     images: [],
     author: '',
   });
-  const [images, setImages] = useState([]); 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setArticleData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const [images, setImages] = useState([]);
+  const handleChange = (event) => {
+    console.log(event);
+    const { name, value } = event.target;
+    if (event.key === 'Enter') {
+      console.log(7777);
+      // הוספת שורה רווח במיקום הנוכחי של הסמן
+      const { selectionStart, selectionEnd } = event.target;
+      const newContent = `${articleData.content.slice(0, selectionStart)}\n${articleData.content.slice(selectionEnd)}`;
+      // עדכון שדה התוכן בסטייט
+      setArticleData((prevData) => ({
+        ...prevData,
+        [name]: newContent,
+      }));
+    }
+    // אחרת, ביצוע השמה רגילה
+    else {
+      setArticleData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleImageChange = (e) => {
@@ -24,13 +39,12 @@ const AddArticleG = ({ title, onAddArticle, path }) => {
 
     setImages((prevImages) => [...prevImages, ...selectedImages]);
   };
-  console.log(articleData, images);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    
+
     // הוספת תמונות מרובות ל-FormData
     console.log(images);
     images.forEach((image, index) => {
@@ -47,7 +61,7 @@ const AddArticleG = ({ title, onAddArticle, path }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-console.log(response);
+      console.log(response);
       onAddArticle();
     } catch (error) {
       console.error('שגיאה בעדכון המאמר:', error);
@@ -93,11 +107,11 @@ console.log(response);
         />
       </label>
       {images.map((image, index) => (
-  <div key={index} className="image-preview">
-    <img src={URL.createObjectURL(image)} alt={`תמונה ${index}`} />
-    <span>{image.name}</span>
-  </div>
-))}
+        <div key={index} className="image-preview">
+          <img src={URL.createObjectURL(image)} alt={`תמונה ${index}`} />
+          <span>{image.name}</span>
+        </div>
+      ))}
       <label>
         שם הכותב:
         <input

@@ -5,17 +5,17 @@ import "../assets/css/Article.css";
 
 const Article = ({ article, onClose, deleteArtical }) => {
   const { id, date, title, content, author, images } = article;
-
+  console.log(content);
   return (
     <div className="article">
-      
+
 
       <div className="content">
 
         <h1 className="title">{title}</h1>
-<div className="images">
-        <Gallery images={images} />
-      </div>
+        <div className="images">
+          <Gallery images={images} />
+        </div>
 
         {date && (
           <div className="date">{format(date, 'dd-MM-yyyy')}</div>
@@ -25,7 +25,7 @@ const Article = ({ article, onClose, deleteArtical }) => {
           <div className="author"> {author}</div>
         )}
 
-        <div className="text">{content}</div>
+        <p className="text">{content}</p>
 
         {deleteArtical &&
           <button

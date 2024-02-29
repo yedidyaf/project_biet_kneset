@@ -1,81 +1,86 @@
 .article {
-    
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .images {
-    flex: 1;
-    /* text-align: left; */
-     
-  }
-  
-  .content {
-    flex: 1;  
-    color: #0fab48; 
-  }
-  
-  .title {
-    font-size: 62px;
-    margin: 0; 
-  }
-  
-  .text {
-    margin-top: 30px;
-    font-size: 22px;
-    line-height: 2; 
-    color: aliceblue; 
-  } 
-  
-  .date {
-    margin: 20px;
-    font-size: 18px;
-    color: #999;
-    font-style: italic;
-  }
-  
-  .author { 
-    text-align: right;
-    font-style: italic;
-    font-size: 18px;
-    color: #999;
-  }
-  @media (max-width: 768px) {
 
-    .article {
-      flex-direction: column;
-    }
-    
-    .images {
-       margin-right: 0;
-       margin-bottom: 30px;
-    }
-  
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.images {
+  flex: 1;
+  /* text-align: left; */
+
+}
+
+.content {
+  flex: 1;
+  color: #0fab48;
+}
+
+.title {
+  font-size: 62px;
+  margin: 0;
+}
+
+.text {
+  margin-top: 30px;
+  font-size: 22px;
+  line-height: 2;
+  color: aliceblue;
+  white-space: pre-wrap;
+}
+
+.date {
+  margin: 20px;
+  font-size: 18px;
+  color: #999;
+  font-style: italic;
+}
+
+.author {
+  text-align: right;
+  font-style: italic;
+  font-size: 18px;
+  color: #999;
+}
+
+@media (max-width: 768px) {
+
+  .article {
+    flex-direction: column;
   }
-  .delete-button{
-    background-color:#ba2828 ;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
+
+  .images {
+    margin-right: 0;
+    margin-bottom: 30px;
   }
-  .delete-button:hover {
-    background-color: #555;
-  }
-  .close-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .close-button:hover {
-    background-color: #555;
-  }
+
+}
+
+.delete-button {
+  background-color: #ba2828;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  background-color: #555;
+}
+
+.close-button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.close-button:hover {
+  background-color: #555;
+}

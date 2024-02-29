@@ -1,9 +1,9 @@
 // AddArticleG.jsx
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '../../assets/css/AddArticleG.css';
-import axios from '../../component/Axios';
+import axios from '../component/Axios';
 
-const ChangeArticleG = ({ article, onAddArticle, path ,isChange}) => {
+const ChangeArticleG = ({ article, onAddArticle, path ,isChange,}) => {
   const [articleData, setArticleData] = useState({
     title: article.title,
     content: article.content,
@@ -67,7 +67,7 @@ console.log(response);
 
   return (
     <form className="add-article-form" onSubmit={handleSubmit}>
-      <h3> שנה כתבה</h3>
+      <h3 > שנה כתבה</h3>
       <label>
         כותרת:
         <input

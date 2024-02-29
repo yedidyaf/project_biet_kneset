@@ -15,7 +15,7 @@ const TfilaTimes = () => {
 
   const fetchPrayerTimes = async () => {
     try {
-      const response = await axios.get('/gabai/times');
+      const response = await axios.get('/times');
       const fetchedArrTfilaTimes = response.data;
 
       const fetchedWeekday = fetchedArrTfilaTimes.filter(x => !x.is_sabbath);
@@ -32,18 +32,16 @@ const TfilaTimes = () => {
 
   return (
     <div className="prayer-times">
-      
+      <h3 className="title">זמני תפילות </h3>
         <div className="frame">
-          <h3 className="title">זמני תפילות (ימות חול)</h3>
+        <h3 > יום חול </h3>
           <table className="table">
             <tbody>
               {weekday&& weekday.map(prayer => (
                 <tr key={prayer.id}>
                   <td className="cell">{prayer.name}</td>
                   <td className="cell">{prayer.time}</td>
-                  <td>
-
-                  </td>
+                  
                 </tr>
               ))}
             </tbody>
@@ -52,15 +50,14 @@ const TfilaTimes = () => {
       
 
       <div className="frame">
-        <h3 className="title">זמני תפילות (שבת)</h3>
+      <h3 >שבת</h3>
         <table className="table">
           <tbody>
             {sabbath && sabbath.map(prayer => (
               <tr key={prayer.id}>
                 <td className="cell">{prayer.name}</td>
                 <td className="cell">{prayer.time}</td>
-                <td>
-                </td>
+                
               </tr>
             ))}
           </tbody>

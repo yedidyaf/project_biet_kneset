@@ -1,10 +1,13 @@
 // MemberForm.jsx
 import React, { useState } from 'react';
 import '../../assets/css/MemberForm.css';
-import axios from '../../component/Axios';
+import axios from '../component/Axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const MemberFormG = ({addMembers}) => {
+  const navigate = useNavigate();
+
   const [memberData, setMemberData] = useState({
     first_name: '',
     last_name: '',
@@ -41,8 +44,11 @@ console.log(jsonMembersData);
         address: '',
       });
     } catch (error) {
+     
       console.error('Error adding member:', error);
-      
+       if(error.response.data.error==='Authentication failed: Missing token'){
+        navigate('/gabai/login');
+      }
       // טיפול בשגיאה מהשרת
       if (error.response) {
         // השגיאה מכילה תגובה מהשרת עם קוד HTTP וגוף התגובה

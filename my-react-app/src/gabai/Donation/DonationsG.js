@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../component/Axios';
+import axios from '../component/Axios';
 import DonationG from "./DonationG";
 import DonationForm from "./DonationForm";
+import { useNavigate } from 'react-router-dom';
 
 const DonationsG = () => {
     const [donations, setDonations] = useState([]);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const [selectedDonationId, setSelectedDonationId] = useState(null);
     const [isAdd, setIsAdd] = useState(false)
@@ -13,12 +15,17 @@ const DonationsG = () => {
         // בקשת GET לשרת בעת טעינת הקומפוננטה
         axios.get('/gabai/donations')
             .then(response => {
-                console.log(response);
-                // עדכון הסטייט עם המידע מהשרת
+                
+                
+            
                 setDonations(response.data);
                 setError(null)
             })
             .catch(error => {
+                if(error.response.data.error==='Authentication failed: Missing token'){
+                    navigate('/gabai/login');
+                  }
+                console.log(error);
                 // עדכון הסטייט בשגיאה אם קיימת
                 setError('Error fetching data: ' + error.message);
             });
@@ -33,23 +40,26 @@ const DonationsG = () => {
         setSelectedDonationId(null);
     };
 
-    const handleFormSubmit = async (method, id, data) => {
-        console.log(data);
-        try {
-            const response = await fetch('http://localhost:4000/gabai/donations', {
-                method: 'POST',
-                body: data,
-            })
+   const handleFormSubmit = async (method, id, data) => {
+  console.log(data);
 
-            console.log(response);
-            fetchDonations();
-        } catch (error) {
-            console.error('שגיאה בשליחת בקשת עריכה/הוספה/מחיקה:', error);
-        } finally {
-            setIsAdd(false)
-            setSelectedDonationId(null);
-        }
-    };
+  try {
+    const response = await axios.post('http://localhost:4000/gabai/donations', data,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    console.log(response.data);
+    fetchDonations();
+  } catch (error) {
+    console.error('שגיאה בשליחת בקשת עריכה/הוספה/מחיקה:', error);
+  } finally {
+    setIsAdd(false);
+    setSelectedDonationId(null);
+  }
+};
 
     const fetchDonations = async () => {
         try {

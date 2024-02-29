@@ -1,5 +1,10 @@
 import { DateTime } from 'luxon'
 import dbFunctions from './DataB.js';
+import cron from 'node-cron';
+
+
+
+// הפעלה של פונקציה כל 42 שעות
 
 export  function fetchData() {
     
@@ -41,11 +46,14 @@ export  function fetchData() {
             tzeit7083deg
           };
           console.log(9999);
-          dbFunctions.addDayTimes(zmanim);
+          dbFunctions.updateDayTimes(zmanim);
     })
     .catch(error => {
       // טפל בשגיאה אם קיימת
       console.error('Fetch error:', error);
     });
 }
-fetchData()
+fetchData();
+cron.schedule('1 0 * * *', () => {
+fetchData(); 
+});

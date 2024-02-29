@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../component/Axios';
+import axios from './component/Axios';
 import '../assets/css/GabaiList.css'
+import { useNavigate } from 'react-router-dom';
+
 const GabaiList = () => {
+    const navigate = useNavigate();
+
     const [gabais, setGabais] = useState([]);
     const [newGabai, setNewGabai] = useState({ name: '', email: '', password: '' });
     const [password2, setPassword2] = useState('');
@@ -15,6 +19,9 @@ const GabaiList = () => {
             setGabais(response.data);
         } catch (error) {
             console.error('שגיאה בקריאה לרשימת הגבאים:', error);
+            if(error.response.data.error==='Authentication failed: Missing token'){
+                navigate('/gabai/login');
+              }
         }
     };
 
@@ -31,10 +38,11 @@ const GabaiList = () => {
             const response = await axios.post('/gabai/gabais', JSON.stringify(newGabai));
             console.log(response);
             if (response.statusText === 'OK') {
-                // אם ההוספה הצליחה, נעדכן את רשימת הגבאים
+
                 fetchGabais();
-                // נאפס את השדות להכנסת גבאי חדש
+
                 setNewGabai({ name: '', email: '',password:'' });
+
                 setPassword2('')
             } else {
                 console.error('שגיאה בהוספת גבאי:', response.statusText);
@@ -64,7 +72,7 @@ const GabaiList = () => {
             <ul className="gabais-list">
                 {gabais.map((gabai) => (
                     <li key={gabai.id+new Date()} className="gabai-item">
-                        <strong>שם הגבאי:</strong> {`הרב${gabai.user_id} ${gabai.last_name} שליט"א`}<br />
+                        <strong>שם הגבאי:</strong> {`הרב ${gabai.user_id} ${gabai.last_name} שליט"א`}<br />
                         <strong>Email:</strong> {gabai.email}<br />
                         <button className="delete-button" onClick={() => handleDelete(gabai.id)}>
                             🗑️
@@ -82,7 +90,7 @@ const GabaiList = () => {
                 />
                 <input
                     type="email"
-                    placeholder="הכנס כתובת מייל של גבאי"
+                    placeholder=" הכנס כתובת מייל של גבאי שקיים בחברי בית כנסת"
                     value={newGabai.email}
                     onChange={(e) => setNewGabai({ ...newGabai, email: e.target.value })}
                 />

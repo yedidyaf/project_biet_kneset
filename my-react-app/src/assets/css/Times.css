@@ -1,8 +1,9 @@
 /* Times.css */
 
 .times-container {
+  text-align: center;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .tfila-timess{
@@ -12,9 +13,14 @@
  width: 20%;
 }
 .tfila-timess {
-  text-align:left;
+  text-align:center;
 }
 
 .daily-timess {
-  text-align: left;
+  text-align:right;
+}
+.times-container {
+  text-align: center;
+  display: flex; 
+  justify-content: center;
 }

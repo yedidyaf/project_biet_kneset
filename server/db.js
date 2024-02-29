@@ -1,72 +1,72 @@
-import mysql from 'mysql2/promise';
+// import mysql from 'mysql2/promise';
 
-class DatabaseFunctions {
-    constructor(pool) {
-        this.pool = pool;
-    }
+// class DatabaseFunctions {
+//     constructor(pool) {
+//         this.pool = pool;
+//     }
 
-    async getArticalsHome() {
-        try {
-            const [[result]] = await this.pool.query(`SELECT * FROM home`);
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.error(error);
-            return error;
-        }
-    }
+//     async getArticalsHome() {
+//         try {
+//             const [[result]] = await this.pool.query(`SELECT * FROM home`);
+//             console.log(result);
+//             return result;
+//         } catch (error) {
+//             console.error(error);
+//             return error;
+//         }
+//     }
 
-    async getTimes() {
-        try {
-            const [[result]] = await this.pool.query(`SELECT * FROM times`);
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.error(error);
-            return error;
-        }
-    }
+//     async getTimes() {
+//         try {
+//             const [[result]] = await this.pool.query(`SELECT * FROM times`);
+//             console.log(result);
+//             return result;
+//         } catch (error) {
+//             console.error(error);
+//             return error;
+//         }
+//     }
 
-    async getMembers() {
-        try {
-            const [[result]] = await this.pool.query(`SELECT * FROM members`);
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.error(error);
-            return error;
-        }
-    }
+//     async getMembers() {
+//         try {
+//             const [[result]] = await this.pool.query(`SELECT * FROM members`);
+//             console.log(result);
+//             return result;
+//         } catch (error) {
+//             console.error(error);
+//             return error;
+//         }
+//     }
 
-    async getDonations() {
-        try {
-            const [[result]] = await this.pool.query(`SELECT * FROM donations`);
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.error(error);
-            return error;
-        }
-    }
+//     async getDonations() {
+//         try {
+//             const [[result]] = await this.pool.query(`SELECT * FROM donations`);
+//             console.log(result);
+//             return result;
+//         } catch (error) {
+//             console.error(error);
+//             return error;
+//         }
+//     }
 
-    async setMember(member) {
-        try {
-            const res = await this.pool.query(`
-                INSERT INTO members (name, email, phone) 
-                VALUES (?, ?, ?)`,
-                [member.name, member.email, member.phone]);
+//     async setMember(member) {
+//         try {
+//             const res = await this.pool.query(`
+//                 INSERT INTO members (name, email, phone) 
+//                 VALUES (?, ?, ?)`,
+//                 [member.name, member.email, member.phone]);
 
-            return { ...member, id: res.insertId };
-        } catch (error) {
-            console.log(error);
-            return error;
-        }
-    }
-}
+//             return { ...member, id: res.insertId };
+//         } catch (error) {
+//             console.log(error);
+//             return error;
+//         }
+//     }
+// }
 
-const dbFunctions = new DatabaseFunctions(pool);
+// const dbFunctions = new DatabaseFunctions(pool);
 
-export default dbFunctions;
+// export default dbFunctions;
 
 
 

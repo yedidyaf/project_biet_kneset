@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from '../../component/Axios';
-import CardComponent from '../../component/CardComponent';
+import React, {useState } from 'react';
 import AddArticleG from './AddArticaleG';
-import AllCards from '../../component/AllCards';
 import AllCardsG from './AllCardsG';
 
 const NewsG = () => {

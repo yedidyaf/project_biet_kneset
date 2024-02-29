@@ -419,32 +419,70 @@ class DatabaseFunctions {
 
 
 
-    async addDayTimes(data) {
-        try {
-            const res = await this.pool.query(`
-                INSERT INTO day_times 
-                (alotHaShachar, misheyakir, sunrise, sofZmanShma, sofZmanShmaMGA, 
-                 sofZmanTfilla, sofZmanTfillaMGA, chatzot, sunset, tzeit7083deg) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                [
-                    data.alotHaShachar,
-                    data.misheyakir,
-                    data.sunrise,
-                    data.sofZmanShma,
-                    data.sofZmanShmaMGA,
-                    data.sofZmanTfilla,
-                    data.sofZmanTfillaMGA,
-                    data.chatzot,
-                    data.sunset,
-                    data.tzeit7083deg
-                ]);
+    // async addDayTimes(data) {
+    //     try {
+    //         const res = await this.pool.query(`
+    //             INSERT INTO day_times 
+    //             (alotHaShachar, misheyakir, sunrise, sofZmanShma, sofZmanShmaMGA, 
+    //              sofZmanTfilla, sofZmanTfillaMGA, chatzot, sunset, tzeit7083deg) 
+    //             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    //             [
+    //                 data.alotHaShachar,
+    //                 data.misheyakir,
+    //                 data.sunrise,
+    //                 data.sofZmanShma,
+    //                 data.sofZmanShmaMGA,
+    //                 data.sofZmanTfilla,
+    //                 data.sofZmanTfillaMGA,
+    //                 data.chatzot,
+    //                 data.sunset,
+    //                 data.tzeit7083deg
+    //             ]);
 
-            return { ...data, id: res.insertId };
+    //         return { ...data, id: res.insertId };
+    //     } catch (error) {
+    //         console.error(error);
+    //         return error;
+    //     }
+    // }
+    async updateDayTimes(data) {
+        try {
+          const res = await this.pool.query(`
+            UPDATE day_times 
+            SET 
+              alotHaShachar = ?,
+              misheyakir = ?,
+              sunrise = ?,
+              sofZmanShma = ?,
+              sofZmanShmaMGA = ?,
+              sofZmanTfilla = ?,
+              sofZmanTfillaMGA = ?, 
+              chatzot = ?,
+              sunset = ?,
+              tzeit7083deg = ?  
+            WHERE id = ?`,
+            [
+              data.alotHaShachar, 
+              data.misheyakir,
+              data.sunrise,
+              data.sofZmanShma,
+              data.sofZmanShmaMGA,
+              data.sofZmanTfilla,
+              data.sofZmanTfillaMGA,
+              data.chatzot,
+              data.sunset,
+              data.tzeit7083deg,
+              1
+            ]
+          );
+      
+          return {...data, id};
         } catch (error) {
-            console.error(error);
-            return error;
+          console.error(error);
+          return error; 
         }
-    }
+      }
+      
 
     async getDayTimes() {
         try {

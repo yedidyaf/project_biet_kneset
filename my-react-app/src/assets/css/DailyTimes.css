@@ -1,10 +1,10 @@
 .daily-times {
   background: linear-gradient(to bottom, #e4a769, #e1b894);
   border-radius: 10px;
-  padding: 50px;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);  
   margin: 40px;  
-
+height: 100%;
 }
 
 .title {
@@ -21,7 +21,7 @@
 
 .cell {
   padding: 10px;
-  font-size: 18px; 
+  font-size: 16px; 
   text-align: center; 
   border-bottom: 2px dotted #141212;  
 }

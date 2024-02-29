@@ -51,15 +51,19 @@ const Gallery = ({ images }) => {
 
   return (
     <div className="gallery">
-      {images.length>1 && <button className="prev" onClick={prevImage} disabled={currentIndex === 0}>
-        &#10094;
-      </button>}
+      {images.length > 1 && currentIndex > 0 && (
+  <button className="prev" onClick={prevImage}>
+    &#10094;
+  </button>
+)}
 
       <img src={arrImages[currentIndex]} className="gallery-image" alt={`Gallery Image ${currentIndex}`} />
 
-      {images.length>1 && <button className="next" onClick={nextImage} disabled={currentIndex === arrImages.length - 1}>
-        &#10095;
-      </button>}
+      {images.length > 1 && currentIndex < arrImages.length - 1 && (
+  <button className="next" onClick={nextImage}>
+    &#10095;
+  </button>
+)}
     </div>
   );
 };

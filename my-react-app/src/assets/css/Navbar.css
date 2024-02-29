@@ -8,6 +8,7 @@
   z-index: 1000; 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  
 }
 .logo {
   position: fixed;
@@ -19,6 +20,7 @@
   padding: 3px;
 }
 main {
+  
   margin-top: 100px;
 }
 /* סגנון לקישורים (כפתורים) בתפריט */
@@ -68,4 +70,22 @@ main {
   float: left;
   margin-left: 20px; 
   position: fixed;
+}
+.footer-info {
+  padding: 20px; /* מרווח פנימי עבור הפרטים התחתונים */
+  background-color: #1b1717; /* רקע אחורי של הפרטים התחתונים */
+  text-align: center; /* מיקום הטקסט במרכז */
+  color: #f4f1f1;
+}
+
+.footer-info p {
+  margin: 8px 0; /* מרווח בין פרט לפרט */
+}
+.user-name {
+  position: fixed;
+  margin-left: 40px;
+  color: #080808;
+  top: 20px;
+  left: 20px; 
+  background-color: #5a79e9 ;
 }

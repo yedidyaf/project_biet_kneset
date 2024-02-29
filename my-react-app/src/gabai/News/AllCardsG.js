@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import CardComponent from '../../component/CardComponent';
 import Article from '../../component/Article';
 import '../../assets/css/AllCards.css';
-import axios from '../../component/Axios';
+import axios from '../component/Axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const AllCardsG = ({ title, AddArticle }) => {
+  const navigate = useNavigate();
+
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [cardsData, setCardsData] = useState([]);
   const [newA, setNewA] = useState(true);
@@ -18,6 +21,9 @@ const AllCardsG = ({ title, AddArticle }) => {
       })
       .catch(error => {
         console.error('Error fetching data:', error);
+        if(error.response.data.error==='Authentication failed: Missing token'){
+          navigate('/gabai/login');
+        }
       });
   }, [newA]);
 

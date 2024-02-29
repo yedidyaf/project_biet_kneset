@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../component/Axios'; // ייתכן שיהיה צורך להתקין את הספריה עם npm install axios
+import axios from '../component/Axios'; 
 
 import '../../assets/css/Members.css';
 import MemberFormG from './MemberFormG';
+import { useNavigate } from 'react-router-dom';
 
 const MembersG = () => {
+  const navigate = useNavigate();
+
   const [membersData, setMembersData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -15,11 +18,14 @@ const MembersG = () => {
 
   const fetchMembersData = async () => {
     try {
-      const response = await axios.get('/members'); // ניחוש: /members הוא הניתוב הנכון לשרת שלך
+      const response = await axios.get('/gabai/members');
       console.log(response);
       setMembersData(response.data);
     } catch (error) {
       console.error(error);
+      if(error.response.data.error==='Authentication failed: Missing token'){
+        navigate('/gabai/login');
+      }
       setError('אירעה שגיאה בטעינת המידע. נסה שוב מאוחר יותר.');
     }
   };

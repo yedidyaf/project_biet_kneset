@@ -1,15 +1,17 @@
 .prayer-times {
+  
   background: linear-gradient(to right, #c7a708, #e4c496); 
-  padding: 70px;
+  padding: 40px;
   border-radius: 10px;
   margin: 40px;  
   /* position: relative; */
   /* overflow: hidden; */
+  width: 80%;
 }
 
 .frame {
   background: rgba(255, 255, 255, 0.3); 
-  border-radius: 10px;
+  border-radius: 100px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   padding: 70px;  
   transition: transform 0.3s ease;  
@@ -23,9 +25,10 @@
 
 h3 {
   text-align: center;
-  color: rgb(63, 51, 227);
+  color: rgb(123, 120, 22);
   font-family: Varela Round, sans-serif;
   letter-spacing: 2px;
+  font-size: 200%;
   text-shadow: 
     1px 0px 1px #bf830a,
     0px 1px 1px #dfa60a,  
@@ -34,7 +37,21 @@ h3 {
     2px 1px 1px #8f7505,
     2px 3px 1px #bc6a17;
 }
+.but-edit,
+.but-delete {
+  background-color: #69396f;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer; 
+  margin: 20px;
+}
 
+.but-edit:hover,
+.but-delete:hover {
+  background: #0062cc;
+}
 /* איורים */
 
 

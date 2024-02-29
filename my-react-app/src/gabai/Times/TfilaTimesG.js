@@ -1,6 +1,6 @@
 // TfilaTimesG.jsx
 import React, { useState, useEffect } from "react";
-import axios from '../../component/Axios';
+import axios from '../component/Axios';
 
 import '../../assets/css/TfilaTimes.css';
 import TfilaTimesForm from "./TfilaTimesForm";
@@ -38,7 +38,7 @@ const TfilaTimesG = () => {
     setSelectedPrayerId(prayerId);
   };
 
-  
+
   const handleDeleteClick = async (prayerId) => {
     try {
       await axios.delete(`/gabai/times/${prayerId}`);
@@ -48,7 +48,7 @@ const TfilaTimesG = () => {
     }
   };
 
-  
+
   const handleFormSubmit = async (method, id, data) => {
     try {
       // בקשת POST או PUT לשרת, תלוי בהוספה או עריכה
@@ -57,7 +57,7 @@ const TfilaTimesG = () => {
         : await axios.put(`/gabai/times/${id}`, data);
 
       console.log(response);
-  
+
       fetchPrayerTimes();
     } catch (error) {
       console.error('שגיאה בשליחת בקשת עריכה/הוספה:', error);
@@ -69,29 +69,40 @@ const TfilaTimesG = () => {
 
   return (
     <div className="prayer-times">
-      
-        <div className="frame">
-          <h3 className="title">זמני תפילות (ימות חול)</h3>
-          <table className="table">
-            <tbody>
-              {weekday&& weekday.map(prayer => (
-                <tr key={prayer.id}>
-                  <td className="cell">{prayer.name}</td>
-                  <td className="cell">{prayer.time}</td>
-                  <td>
-                    <button onClick={() => handleEditClick(prayer.id)}>עריכה</button>
-                    <button onClick={() => handleDeleteClick(prayer.id)}>מחיקה</button>
+<h3 className="title">  זמני תפילות </h3>
+<h4>הוספת ועריכת זמני תפילות</h4>
+      <TfilaTimesForm
+        editMode={editMode}
+        selectedPrayerId={selectedPrayerId}
+        onFormSubmit={handleFormSubmit}
+        ArrTfilaTimes={ArrTfilaTimes}
+      />
+      <div className="frame">
+        <h3 > יום חול </h3>
+        <table className="table">
+          <tbody>
+            {weekday && weekday.map(prayer => (
+              <tr key={prayer.id}>
+                <td className="cell">{prayer.name}</td>
+                <td className="cell">{prayer.time}</td>
+                <td>
+                  <button className="but-edit" onClick={() => handleEditClick(prayer.id)}>
+                    עריכה
+                  </button>
 
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>  
-      
+                  <button className="but-delete" onClick={() => handleDeleteClick(prayer.id)}>
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
 
       <div className="frame">
-        <h3 className="title">זמני תפילות (שבת)</h3>
+        <h3 >שבת</h3>
         <table className="table">
           <tbody>
             {sabbath && sabbath.map(prayer => (
@@ -99,20 +110,15 @@ const TfilaTimesG = () => {
                 <td className="cell">{prayer.name}</td>
                 <td className="cell">{prayer.time}</td>
                 <td>
-                  <button onClick={() => handleEditClick(prayer.id)}>עריכה</button>
+                  <button className="but-edit" onClick={() => handleEditClick(prayer.id)}>עריכה</button>
+                  <button className="but-delete" onClick={() => handleDeleteClick(prayer.id)}>🗑️</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <h4>הוספת ועריכת זמני תפילות</h4>
-      <TfilaTimesForm
-        editMode={editMode}
-        selectedPrayerId={selectedPrayerId}
-        onFormSubmit={handleFormSubmit}
-        ArrTfilaTimes={ArrTfilaTimes}
-      />
+      
     </div>
   );
 };

@@ -38,9 +38,9 @@ function Main() {
                     <Route path='/donations' element={<Donations/>} />
                     <Route path='/members' element={<Members/>} />
                 </Route>
-                
+                <Route path="/gabai/login" element={<Login />}/>
                 <Route path="/gabai/" element={<NavbarG/>}>
-                    <Route path="/gabai/login" element={<Login />}/>
+                    
                     <Route path="/gabai/home" element={<HomeG/>} />
                     <Route path='/gabai/news' element={<NewsG/>} />
                     <Route path='/gabai/times' element={<TimesG/>} />
