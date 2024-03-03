@@ -16,16 +16,14 @@ const AddArticleG = ({ title, onAddArticle, path }) => {
     const { name, value } = event.target;
     if (event.key === 'Enter') {
       console.log(7777);
-      // הוספת שורה רווח במיקום הנוכחי של הסמן
       const { selectionStart, selectionEnd } = event.target;
       const newContent = `${articleData.content.slice(0, selectionStart)}\n${articleData.content.slice(selectionEnd)}`;
-      // עדכון שדה התוכן בסטייט
+
       setArticleData((prevData) => ({
         ...prevData,
         [name]: newContent,
       }));
     }
-    // אחרת, ביצוע השמה רגילה
     else {
       setArticleData((prevData) => ({
         ...prevData,
@@ -45,13 +43,10 @@ const AddArticleG = ({ title, onAddArticle, path }) => {
 
     const formData = new FormData();
 
-    // הוספת תמונות מרובות ל-FormData
-    console.log(images);
     images.forEach((image, index) => {
       formData.append(`images`, image);
     });
 
-    // הוספת נתוני הטופס האחרים
     formData.append("title", articleData.title);
     formData.append("author", articleData.author);
     formData.append("content", articleData.content);
@@ -67,7 +62,6 @@ const AddArticleG = ({ title, onAddArticle, path }) => {
       console.error('שגיאה בעדכון המאמר:', error);
     }
 
-    // ניקוי הטופס והתמונות לאחר שליחה
     setArticleData({
       title: '',
       content: '',

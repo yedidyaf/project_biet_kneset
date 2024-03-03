@@ -9,7 +9,7 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('/home'); // הניחו שיש לך נתיב מתאים בשרת שלך
+                const response = await axios.get('/home');
                 setArticleData(response.data);
             } catch (error) {
                 console.error(error);

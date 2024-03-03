@@ -4,7 +4,6 @@ import Gallery from '../../component/Gallery';
 import Message from '../../component/Message';
 
 const DonationG = ({ donation, onEditClick, onDeleteClick }) => {
-// console.log(donation.images);
 
 const [visible, setVisible] = useState(false);
   const text = donation.how;

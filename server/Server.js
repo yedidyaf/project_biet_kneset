@@ -11,8 +11,7 @@ import { fetchData } from './getZmanim.js';
 import jwt from 'jsonwebtoken';
 
 const app = express();
-console.log("לללל");
-// const upload = multer({ dest: 'uploads/' })
+console.log("The server file User is working");
 const port = process.env.PORT || 5050;
 app.use(cors());
 app.use(express.json())
@@ -94,10 +93,8 @@ app.get('/api/getImage', async (req, res) => {
     const imagePath = req.query.path;
     console.log(imagePath);
     try {
-        // קריאת התמונה באופן אסינכרוני באמצעות promises
         const imageBuffer = await fs.readFile(imagePath);
 
-        // השליחה של התמונה בתגובה
         res.writeHead(200, {
             'Content-Type': 'image/png',
             'Content-Length': imageBuffer.length,

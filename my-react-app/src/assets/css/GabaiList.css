@@ -1,45 +1,4 @@
-/* .gabais-list-container {
-    max-width: 600px;
-    margin: auto;
-}
 
-.gabais-list-title {
-    color: #3498db;
-}
-
-.gabais-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.gabai-item {
-    margin-bottom: 20px;
-}
-
-.gabai-divider {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 0.5px solid #dcdcdc;
-}
-
-.add-gabai-form {
-    margin-top: 20px;
-}
-
-.add-gabai-button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.add-gabai-button:hover {
-    background-color: #2980b9;
-} */
 .gabais-list-container {
     background: linear-gradient(#f6d365, #fda085);
     padding: 30px;

@@ -19,7 +19,6 @@ const MembersG = () => {
   const fetchMembersData = async () => {
     try {
       const response = await axios.get('/gabai/members');
-      console.log(response);
       setMembersData(response.data);
     } catch (error) {
       console.error(error);
@@ -36,16 +35,14 @@ fetchMembersData()
 
   const handleAddition = async (memberId) => {
     try {
-      // שלח בקשת PUT לשרת לפי המזהה memberId
       const response = await axios.put(`/gabai/members/${memberId}`);
-      // עדכן את המידע ברשימת הגבאים
       fetchMembersData();
       setMembersData((prevData) => {
         return prevData.map((member) => {
           if (member.id === memberId) {
             
 
-            return { ...member, /* נתונים חדשים מהתשובה */ };
+            return { ...member, };
           }
           return member;
         });
@@ -57,16 +54,13 @@ fetchMembersData()
   };
 
   const handleDeletion = async (memberId) => {
-    // כאן תוכל להוסיף לוגיקת אישור מחיקה
     const isConfirmed = window.confirm('האם אתה בטוח שאתה רוצה למחוק את החבר?');
     if (!isConfirmed) {
       return;
     }
 
     try {
-      // שלח בקשת DELETE לשרת לפי המזהה memberId
       const response = await axios.delete(`/gabai/members/${memberId}`);
-      // עדכן את המידע ברשימת הגבאים
       setMembersData((prevData) => {
         return prevData.filter((member) => member.id !== memberId);
       });

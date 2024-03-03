@@ -1,11 +1,9 @@
-// Navbar.jsx
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import '../assets/css/Navbar.css';
 import logo from './logoImage.jpg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie'; 
 const Navbar = () => {
   const navigate = useNavigate();
   const [pressing, setPressing] = useState(0)
@@ -20,7 +18,6 @@ const Navbar = () => {
   
   return (
     <><div className="footer-info" >
-      {/* <DateH/> */}
       <div className="logo-container" onClick={addPressing}>
         <img
           src={logo}
@@ -39,7 +36,7 @@ const Navbar = () => {
       <div className="footer-info">
         <p>בית כנסת חניכי הישיבות תל גיבורים בני ברק</p>
         <p>רחוב האצ"ל 13, בני ברק</p>
-        <p>כתובת המייל: example@example.com</p>
+        <p>כתובת המייל: jbh0527174650@gmail.com</p>
         <p> פניות בנוגע לאתר: yedidya friedland</p>
       </div>
     </>

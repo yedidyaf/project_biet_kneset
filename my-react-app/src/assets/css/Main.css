@@ -1,4 +1,3 @@
-/* רקע */
 body {
     background: linear-gradient(-45deg, #ad5919, #0f0e0f, #060ba6, #d57023);
     background-size: 400% 400%;
@@ -18,7 +17,6 @@ body {
     }
   }
   
-  /* כללי */ 
   * {
     box-sizing: border-box;
     margin: 0;
@@ -32,7 +30,6 @@ body {
     min-height: 100vh;
   }
   
-  /* תוכן */
   .content {
     display: flex;
     flex-direction: column;

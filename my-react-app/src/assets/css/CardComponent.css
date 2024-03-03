@@ -37,7 +37,6 @@
 
 @media (min-width: 768px) {
 
-  /* עמוד מחשב - 4 ריבועים בשורה */
   .card {
     width: calc(25% - 20px);
     margin-right: 20px;
@@ -50,7 +49,6 @@
 
 @media (max-width: 767px) {
 
-  /* פלאפון - 1 ריבוע בשורה */
   .card {
     width: 100%;
     margin-right: 0;

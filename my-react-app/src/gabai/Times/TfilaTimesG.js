@@ -1,4 +1,3 @@
-// TfilaTimesG.jsx
 import React, { useState, useEffect } from "react";
 import axios from '../component/Axios';
 
@@ -51,7 +50,6 @@ const TfilaTimesG = () => {
 
   const handleFormSubmit = async (method, id, data) => {
     try {
-      // בקשת POST או PUT לשרת, תלוי בהוספה או עריכה
       const response = method === 'add'
         ? await axios.post('/gabai/times', data)
         : await axios.put(`/gabai/times/${id}`, data);

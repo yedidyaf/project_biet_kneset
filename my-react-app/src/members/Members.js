@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../component/Axios'; // ייתכן שיהיה צורך להתקין את הספריה עם npm install axios
+import axios from '../component/Axios';
 
 import '../assets/css/Members.css';
 import MemberForm from './MemberForm';
@@ -17,7 +17,7 @@ const Members = () => {
 
 const fetchMembersData = async () => {
       try {
-        const response = await axios.get('/members'); // ניחוש: /members הוא הניתוב הנכון לשרת שלך
+        const response = await axios.get('/members');
         console.log(response);
         setMembersData(response.data);
       } catch (error) {

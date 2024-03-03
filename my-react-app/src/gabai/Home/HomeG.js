@@ -17,7 +17,6 @@ const HomeG = () => {
         
       })
       .catch(error => {
-        console.log(error);
         console.error('Error fetching article:', error);
     
         if (error.response && error.response.data && error.response.data.error) {
@@ -29,10 +28,10 @@ const HomeG = () => {
           } else if (errorMessage === 'Forbidden: Invalid role') {
             console.log(errorMessage);
             navigate('/gabai/login');
-            // טיפול נוסף כפי שרלוונט לאפליקציה שלך
           } else {
             console.log(errorMessage);
-            // טיפול נוסף כפי שרלוונט לאפליקציה שלך
+            navigate('/gabai/login');
+
           }
         } 
       });

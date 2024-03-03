@@ -17,15 +17,7 @@ import GabaiList from '../gabai/GabaiList';
 import '../assets/css/Main.css'
 function Main() {
 
-    // const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || "");
     
-    // const setUserApp = (newUser) => {
-    //     setUser(newUser);
-    // }
-    // const deleteUser = () => {
-    //     setUser("");
-    // }
-    // console.log(user);
     return (<><div>
         <BrowserRouter>
             <Routes>
@@ -48,7 +40,6 @@ function Main() {
                     <Route path='/gabai/members' element={<MembersG/>} />
                     <Route path='/gabai/gabais' element={<GabaiList/>} />
                 </Route>
-                {/* <Route path='*' element={<NotFoundPage />} /> */}
             </Routes>
         </BrowserRouter>
 

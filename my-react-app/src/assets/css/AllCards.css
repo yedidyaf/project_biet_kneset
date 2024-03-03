@@ -17,7 +17,6 @@
     gap: 20px;
   }
   
-  /* הוספת סגנונות לאובייקטים בקונטיינר */
   .card {
     position: relative;
     width: 100%;
@@ -55,7 +54,6 @@
   }
   
   @media (min-width: 768px) {
-    /* עמוד מחשב - 4 ריבועים בשורה */
     .card {
       width: calc(30% - 20px);
     }
@@ -66,7 +64,6 @@
   }
   
   @media (max-width: 767px) {
-    /* פלאפון - 1 ריבוע בשורה */
     .card {
       width: 100%;
     }

@@ -7,14 +7,11 @@ const Donations = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // בקשת GET לשרת בעת טעינת הקומפוננטה
         axios.get('/donations')
             .then(response => {
-                // עדכון הסטייט עם המידע מהשרת
                 setDonations(response.data);
             })
             .catch(error => {
-                // עדכון הסטייט בשגיאה אם קיימת
                 setError('Error fetching data: ' + error.message);
             });
     }, []);

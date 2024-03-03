@@ -1,7 +1,6 @@
 import Axios from 'axios';
 import Cookies from 'js-cookie';
 
-// ...
 
 const axios = Axios.create({
   baseURL: 'http://localhost:4000/',
@@ -17,4 +16,3 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 export default axios;
-// עכשיו כל בקשה שתעשה עם `api` ישלח את ה-token ב-header של Authorization

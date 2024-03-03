@@ -476,7 +476,7 @@ class DatabaseFunctions {
             ]
           );
       
-          return {...data, id};
+          return {...data};
         } catch (error) {
           console.error(error);
           return error; 

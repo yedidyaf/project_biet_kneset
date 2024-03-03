@@ -6,16 +6,11 @@ import Cookies from 'js-cookie';
 const NavbarG = () => {
   const navigate = useNavigate();
   const userName = Cookies.get('user_name');
-  console.log(userName);
   const logOut = () => {
-    // מסירה את הטוקן מהקובץ cookie
     Cookies.remove('token', { path: '/' });
-    // מסירה את ה user_id מהקובץ cookie
     Cookies.remove('user_id', { path: '/' });
-    // מסירה את ה user_name מהקובץ cookie
     Cookies.remove('user_name', { path: '/' });
   
-    // הובילות את המשתמש לעמוד התחברות
     
     navigate('/gabai/login');
   };
@@ -36,6 +31,12 @@ const NavbarG = () => {
       <Link to = "/gabai/gabais" className="nav-btn">גבאים</Link>
       {userName && <button className="user-name" onClick={logOut}>יציאה מ:{userName}</button>}
       <Outlet />
+      <div className="footer-info">
+        <p>בית כנסת חניכי הישיבות תל גיבורים בני ברק</p>
+        <p>רחוב האצ"ל 13, בני ברק</p>
+        <p>כתובת המייל: jbh0527174650@gmail.com</p>
+        <p> פניות בנוגע לאתר: yedidya friedland</p>
+      </div>
     </>
   );
 };

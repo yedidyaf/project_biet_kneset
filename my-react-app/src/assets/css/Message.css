@@ -18,11 +18,7 @@
     text-align: center;
     width: 300px;   
   }
-  
-  /* body {
-    filter: blur(3px) grayscale(0.5);
-    transition: all 0.3s; 
-  } */
+ 
   .message {
     position: absolute;
     top: 50%;

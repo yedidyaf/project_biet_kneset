@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../../assets/css/MemberForm.css';
 import axios from '../component/Axios';
 import { useNavigate } from 'react-router-dom';
-
+import joi from 'joi';
 
 const MemberFormG = ({addMembers}) => {
   const navigate = useNavigate();
@@ -49,15 +49,11 @@ console.log(jsonMembersData);
        if(error.response.data.error==='Authentication failed: Missing token'){
         navigate('/gabai/login');
       }
-      // טיפול בשגיאה מהשרת
       if (error.response) {
-        // השגיאה מכילה תגובה מהשרת עם קוד HTTP וגוף התגובה
         setError(`Error: ${error.response.status} - ${error.response.data.message}`);
       } else if (error.request) {
-        // אין תגובה מהשרת
         setError('No response from server');
       } else {
-        // שגיאה בזמן יצירת הבקשה
         setError(`Error: ${error.message}`);
       }
     }

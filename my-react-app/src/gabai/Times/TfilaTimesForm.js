@@ -1,4 +1,3 @@
-// TfilaTimesForm.jsx
 import React, { useState, useEffect } from 'react';
 
 const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTimes }) => {
@@ -7,7 +6,6 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
   const [isSabbath, setIsSabbath] = useState(false);
 
   useEffect(() => {
-    // כאשר מצב עריכה, יש למלא את הפרטים הקיימים של התפילה
     if (editMode && selectedPrayerId !== null) {
       const selectedPrayer = ArrTfilaTimes.find(prayer => prayer.id === selectedPrayerId);
       if (selectedPrayer) {
@@ -21,7 +19,6 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    // הפעולה שתתבצע כאשר המשתמש לוחץ שלח בטופס
     const formData = {
       name,
       time,
@@ -29,7 +26,6 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
     };
 
     if (editMode) {
-      // במצב עריכה, שלח פעולת PUT
       
       onFormSubmit('PUT', selectedPrayerId, formData);
       setName('');
@@ -39,7 +35,6 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
 
     } else {
      
-      // במצב הוספה, שלח פעולת POST
       onFormSubmit('add', null, formData);
       setName('');
       setTime('');

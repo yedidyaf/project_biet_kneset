@@ -11,7 +11,7 @@ import { fetchData } from './getZmanim.js';
 import jwt from 'jsonwebtoken';
 
 const app = express();
-console.log("קובץ שרת הגבאי עובד");
+console.log("The server file is working");
 const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json())
@@ -22,7 +22,6 @@ app.use((req, res, next) => {
 
 
 
-// פונקציות לגבאים בלבד
 
 
 const authenticateGabai = (req, res, next) => {
@@ -34,17 +33,14 @@ const authenticateGabai = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        if (decoded.expectedRole !== 'gabai') {
-            return res.status(403).json({ error: 'Forbidden: Invalid role' });
-        }
-        req.gabai = decoded; // הוספת המידע של הגבאי לאובייקט הבקשה
+       
+        req.gabai = decoded; 
         next();
     } catch (error) {
         return res.status(401).json({ error: 'Authentication failed: Invalid token' });
     }
 };
 
-// קבע את הmiddleware למסלולים שיש בהם בדיקת התחברות
 app.use(['/gabai/*'], authenticateGabai);
 
 const storage = multer.diskStorage({
@@ -71,20 +67,16 @@ app.get("/gabai/home", async (req, res) => {
 });
 app.post('/gabai/home', upload.array('images', 5), async (req, res) => {
     try {
-        // טיפול בתמונות וקבלת הנתיבים החדשים
         const savedImagePaths = req.files.map((file) => {
             const imagePath = 'C:\\Users\\user\\Desktop\\project_biet_kneset\\server\\images\\' + file.originalname;
             return imagePath;
         });
-        console.log(savedImagePaths);
-        // הכנסת הנתיבים החדשים לאובייקט של הכתבה
         const updatedArticle = {
             ...req.body,
             images: savedImagePaths.map((path) => path.replace('images/', '')), // שינוי נתיבי התמונות למבנה נכון
         };
         updatedArticle.images = JSON.stringify(updatedArticle.images);
         const response = await dbFunctions.putArticalHome(updatedArticle);
-        console.log(response);
         res.status(200);
         res.send(response);
     } catch (error) {
@@ -106,20 +98,15 @@ app.get("/gabai/news", async (req, res) => {
 });
 
 app.post("/gabai/news", upload.array('images', 5), async (req, res) => {
-    console.log(req.files);
     try {
 
-        // טיפול בתמונות וקבלת הנתיבים החדשים
         const savedImagePaths = req.files.map((file) => {
             const imagePath = 'C:\\Users\\user\\Desktop\\project_biet_kneset\\server\\images\\' + file.originalname;
             return imagePath;
         });
-        console.log(savedImagePaths);
 
         const today = new Date();
         const formattedDate = format(today, 'yyyy-MM-dd');
-        console.log(formattedDate);
-        // הכנסת הנתיבים החדשים לאובייקט של הכתבה
         const updatedArticle = {
             ...req.body,
             date: formattedDate,
@@ -128,7 +115,6 @@ app.post("/gabai/news", upload.array('images', 5), async (req, res) => {
         console.log(updatedArticle);
         updatedArticle.images = JSON.stringify(updatedArticle.images);
         const response = await dbFunctions.addArticalNews(updatedArticle);
-        console.log(response);
         res.status(200);
         res.send(response);
     } catch (error) {
@@ -220,11 +206,8 @@ app.get("/gabai/members", async (req, res) => {
 
 
 app.post("/gabai/members", async (req, res) => {
-    console.log(55555);
     try {
-        console.log(req.body);
         const response = await dbFunctions.setMember({ ...req.body, is_v: 1 });
-        console.log(response);
         res.status(200).json(response);
     } catch (error) {
         if (error.message.includes("already exists")) {
@@ -277,7 +260,6 @@ app.post("/gabai/donations", upload.single('file'), async (req, res) => {
         };
 
         updatedDonation.image = JSON.stringify(updatedDonation.image);
-        console.log(updatedDonation.image);
         const response = await dbFunctions.addDonation(updatedDonation);
         res.status(200);
         res.send(response);
@@ -322,8 +304,9 @@ app.delete('/gabai/donations/:id', async (req, res) => {
 app.post("/api/gabai/login", async (req, res) => {
     try {
         const response = await dbFunctions.checkGabai(req.body);
+         
         if (response) {
-            // אם יש גבאי כזה, תשלח תשובה 200 עם הגבאי
+           
             const secretKey = process.env.SECRET_KEY;
 
             const user = {
@@ -331,17 +314,17 @@ app.post("/api/gabai/login", async (req, res) => {
                 user_id: response.user_id,
                 user_name: response.user_name 
             };
+            
             const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
+            console.log("lll");
             res.status(200).json({user_id:response.user_id, token });
 
         } else {
             console.log(404);
-            // אם אין גבאי כזה, תשלח תשובה 404 (Not Found) עם הודעה מתאימה
             res.status(404).json({ error: "גבאי לא נמצא" });
         }
     } catch (error) {
         console.error(error);
-        // אם יש שגיאה במהלך הבדיקה, תשלח תשובת שגיאה 500 (Internal Server Error)
         res.status(500).json({ error: "שגיאת שרת פנימית" });
     }
 });
@@ -385,10 +368,8 @@ app.get('/api/getImage', async (req, res) => {
     const imagePath = req.query.path;
     console.log(imagePath);
     try {
-        // קריאת התמונה באופן אסינכרוני באמצעות promises
         const imageBuffer = await fs.readFile(imagePath);
 
-        // השליחה של התמונה בתגובה
         res.writeHead(200, {
             'Content-Type': 'image/png',
             'Content-Length': imageBuffer.length,

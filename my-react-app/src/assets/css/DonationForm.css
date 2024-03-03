@@ -4,7 +4,6 @@
   padding: 20px;
   box-shadow: 2px 2px 10px #ddd;
   animation: slide-down 0.5s ease;
-  /* width: 80%; */
  
 }
 
@@ -58,7 +57,6 @@
 }
 
 .file-input::before {
-  /* content: url('images/upload.svg');  */
   vertical-align: middle;
   margin-right: 5px;
 }
@@ -74,7 +72,6 @@
 
 .form-container::before {
   content: '';
-  /* background: url('images/flower.png') no-repeat; */
   position: absolute;
   width: 80px; 
   height: 80px;
@@ -84,7 +81,6 @@
 
 .form-container::after {
   content: '';
-  /* background: url('images/bird.png') no-repeat;  */
   position: absolute;
   width: 60px;
   height: 40px;

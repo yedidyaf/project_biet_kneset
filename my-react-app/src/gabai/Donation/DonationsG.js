@@ -12,7 +12,6 @@ const DonationsG = () => {
     const [selectedDonationId, setSelectedDonationId] = useState(null);
     const [isAdd, setIsAdd] = useState(false)
     useEffect(() => {
-        // בקשת GET לשרת בעת טעינת הקומפוננטה
         axios.get('/gabai/donations')
             .then(response => {
                 
@@ -26,7 +25,6 @@ const DonationsG = () => {
                     navigate('/gabai/login');
                   }
                 console.log(error);
-                // עדכון הסטייט בשגיאה אם קיימת
                 setError('Error fetching data: ' + error.message);
             });
     }, []);
@@ -72,7 +70,6 @@ const DonationsG = () => {
 
     const handleDeleteClick = async (donationId) => {
         try {
-            // בקשת DELETE לשרת
             const response = await axios.delete(`/gabai/donations/${donationId}`);
             console.log(response);
             fetchDonations();

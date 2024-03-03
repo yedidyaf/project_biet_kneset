@@ -4,8 +4,7 @@
   padding: 40px;
   border-radius: 10px;
   margin: 40px;  
-  /* position: relative; */
-  /* overflow: hidden; */
+ 
   width: 80%;
 }
 
@@ -52,8 +51,3 @@ h3 {
 .but-delete:hover {
   background: #0062cc;
 }
-/* איורים */
-
-
-
-/* נוסף... */

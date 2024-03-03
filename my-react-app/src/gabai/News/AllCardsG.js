@@ -1,4 +1,3 @@
-// AllCards.jsx
 import React, { useEffect, useState } from 'react';
 import CardComponent from '../../component/CardComponent';
 import Article from '../../component/Article';

@@ -11,7 +11,6 @@ const GabaiList = () => {
     const [password2, setPassword2] = useState('');
     const [error, setError] = useState('');
 
-    // פונקציה לקריאה לשרת וקבלת רשימת הגבאים
     const fetchGabais = async () => {
         try {
             const response = await axios.get('/gabai/gabais');
@@ -25,7 +24,6 @@ const GabaiList = () => {
         }
     };
 
-    // פונקציה להוספת גבאי
     const addGabai = async () => {
         if (password2 !== newGabai.password) {
             setError('הסיסמאות אינן תואמות')
@@ -61,7 +59,6 @@ const GabaiList = () => {
         }
 
     }
-    // useEffect יופעל פעם ראשונה כאשר הקומפוננטה נטענת, ולאחר מכן כל פעם שהתרחשה שינוי ב־newGabai
     useEffect(() => {
         fetchGabais();
     }, []);

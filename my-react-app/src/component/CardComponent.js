@@ -7,7 +7,6 @@ const CardComponent = ({ data, onClick }) => {
 const [image, setImage] = useState(null);
 
   useEffect(() => {
-    // הגדרת הפונקציה לקבלת נתיבי התמונות
     
   const getImageFromServer = async () => {
     console.log(images);
@@ -20,10 +19,8 @@ const [image, setImage] = useState(null);
         responseType: 'arraybuffer',
       });
 
-      // יצירת Blob מהArrayBuffer
       const blob = new Blob([response.data], { type: 'image/png' });
 
-      // יצירת URL מהBlob
       const imageUrl = URL.createObjectURL(blob);
       console.log(imageUrl);
        setImage(imageUrl);
@@ -32,7 +29,7 @@ const [image, setImage] = useState(null);
     }
   };
   if(images)getImageFromServer(images[0])
-  }, [data]); // מערך תלות לוודא שה- useEffect ירוץ רק כאשר 'id' משתנה
+  }, [data]); 
 
   return (
     <div className="card" onClick={onClick}>

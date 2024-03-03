@@ -31,13 +31,11 @@ const ChangeArticleG = ({ article, onAddArticle, path ,isChange,}) => {
 
     const formData = new FormData();
     
-    // הוספת תמונות מרובות ל-FormData
     console.log(images);
     images.forEach((image, index) => {
       formData.append(`images`, image);
     });
 
-    // הוספת נתוני הטופס האחרים
     formData.append("title", articleData.title);
     formData.append("author", articleData.author);
     formData.append("content", articleData.content);
@@ -49,14 +47,12 @@ console.log(formData.get("title"));
         },
       });
 console.log(response);
-      // טיפול בתגובת השרת כפי שנדרש
       onAddArticle();
       isChange()
     } catch (error) {
       console.error('שגיאה בעדכון המאמר:', error);
     }
 
-    // ניקוי הטופס והתמונות לאחר שליחה
     setArticleData({
       title: '',
       content: '',
