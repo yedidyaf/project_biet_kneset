@@ -37,7 +37,7 @@ const AllCardsG = ({ title, AddArticle }) => {
         console.error('Error fetching data:', error);
       });
     setNewA((prev) => !prev);
-    AddArticle();
+    // AddArticle();
   }
 
   const handleCardClick = (data) => {

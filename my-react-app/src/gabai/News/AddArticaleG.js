@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../../assets/css/AddArticleG.css';
 import axios from '../component/Axios';
 
-const AddArticleG = ({ title, onAddArticle, path }) => {
+const AddArticleG = ({ title, onAddArticle, path, setAddA }) => {
   const [articleData, setArticleData] = useState({
     title: '',
     content: '',
@@ -56,8 +56,9 @@ const AddArticleG = ({ title, onAddArticle, path }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response);
+      console.log(response.data);
       onAddArticle();
+      setAddA();
     } catch (error) {
       console.error('שגיאה בעדכון המאמר:', error);
     }

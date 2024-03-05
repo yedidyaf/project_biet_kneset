@@ -5,7 +5,6 @@ import "../assets/css/Article.css";
 
 const Article = ({ article, onClose, deleteArtical }) => {
   const { id, date, title, content, author, images } = article;
-  console.log(content);
   return (
     <div className="article">
 

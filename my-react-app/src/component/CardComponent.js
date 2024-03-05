@@ -9,7 +9,6 @@ const [image, setImage] = useState(null);
   useEffect(() => {
     
   const getImageFromServer = async () => {
-    console.log(images);
     const imagePath = images[0];
     try {
       const response = await axios.get('/api/getImage', {

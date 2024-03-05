@@ -13,9 +13,9 @@ class DatabaseFunctions {
     }
 
     async getArticalHome() {
+        console.log("llll");
         try {
             const [[result]] = await this.pool.query(`SELECT * FROM artical_home`);
-            console.log(result);
             return result;
         } catch (error) {
             console.error(error);
@@ -23,7 +23,6 @@ class DatabaseFunctions {
         }
     }
     async putArticalHome( article) {
-        console.log("ooooooooooo"+article);
         try {
             const res = await this.pool.query(`
                 UPDATE artical_home 
@@ -73,7 +72,6 @@ class DatabaseFunctions {
     async getNews() {
         try {
             const [result] = await this.pool.query(`SELECT * FROM news`);
-            console.log(result);
             return result;
         } catch (error) {
             console.error(error);
@@ -83,7 +81,6 @@ class DatabaseFunctions {
     async getTimes() {
         try {
             const [result] = await this.pool.query(`SELECT * FROM times`);
-            console.log(result);
             return result;
         } catch (error) {
             console.error(error);
@@ -94,7 +91,6 @@ class DatabaseFunctions {
     async getMembers() {
         try {
             const [result] = await this.pool.query(`SELECT * FROM members`);
-            console.log(result);
             return result;
         } catch (error) {
             console.error(error);
@@ -105,7 +101,6 @@ class DatabaseFunctions {
     async getDonations() {
         try {
             const [result] = await this.pool.query(`SELECT * FROM donations`);
-            console.log(result);
             return result;
         } catch (error) {
             console.error(error);
@@ -153,7 +148,6 @@ class DatabaseFunctions {
     
             return { ...member, id };
         } catch (error) {
-            console.log(error);
             return error;
         }
     }
@@ -243,8 +237,7 @@ class DatabaseFunctions {
 
 
     async putTimes(id, times) {
-        console.log(id);
-        console.log(times);
+      
         try {
             const res = await this.pool.query(`
                 UPDATE times 
@@ -364,7 +357,6 @@ class DatabaseFunctions {
     async deleteGabaiByEmail(id) {
         try {
          
-            // מחק את הגבאי בטבלת gabais לפי ה-ID של החבר
             const gabaiResult = await this.pool.query('DELETE FROM gabais WHERE member_id = ?', [id]);
     
             if (gabaiResult.affectedRows === 0) {
@@ -385,7 +377,6 @@ class DatabaseFunctions {
             FROM gabais
             JOIN members ON gabais.member_id = members.id
         `);
-            console.log(result);
             return result;
         } catch (error) {
             console.error(error);
@@ -395,56 +386,24 @@ class DatabaseFunctions {
     async checkGabai(credentials) {
         console.log(credentials);
         try {
-            // בדיקה האם יש גבאי עם שם משתמש וסיסמה כפי שהתקבלו מהאובייקט
             const [result] = await pool.query(`
                 SELECT * FROM gabais
                 WHERE user_id = ? AND password = ?`,
                 [credentials.user_id, credentials.password]);
-    console.log(result);
-            // אם יש גבאי עם השם משתמש והסיסמה, תחזיר את הגבאי
             if (result.length > 0) {
                 
                 return result[0];
             } else {
                 
-                // אחרת, תחזיר `null` או הודעה שאין גבאי כזה
                 return null;
             }
         } catch (error) {
             console.error(error);
-            // במקרה של שגיאה, תחזיר את השגיאה
             return error;
         }
     }
 
 
-
-    // async addDayTimes(data) {
-    //     try {
-    //         const res = await this.pool.query(`
-    //             INSERT INTO day_times 
-    //             (alotHaShachar, misheyakir, sunrise, sofZmanShma, sofZmanShmaMGA, 
-    //              sofZmanTfilla, sofZmanTfillaMGA, chatzot, sunset, tzeit7083deg) 
-    //             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    //             [
-    //                 data.alotHaShachar,
-    //                 data.misheyakir,
-    //                 data.sunrise,
-    //                 data.sofZmanShma,
-    //                 data.sofZmanShmaMGA,
-    //                 data.sofZmanTfilla,
-    //                 data.sofZmanTfillaMGA,
-    //                 data.chatzot,
-    //                 data.sunset,
-    //                 data.tzeit7083deg
-    //             ]);
-
-    //         return { ...data, id: res.insertId };
-    //     } catch (error) {
-    //         console.error(error);
-    //         return error;
-    //     }
-    // }
     async updateDayTimes(data) {
         try {
           const res = await this.pool.query(`
@@ -492,8 +451,6 @@ class DatabaseFunctions {
             if (result.length === 0) {
                 throw new Error('No day times data found');
             }
-    
-            // החזרת הנתונים מהשאילתה
             return result[0];
         } catch (error) {
             console.error(error);
@@ -511,134 +468,3 @@ export default dbFunctions;
 
 
 
-
-
-// async addUser(user) {
-    //     try {
-    //         const res = await this.pool.query(`
-    //         INSERT INTO users (user_name, first_name, last_name, password, email) 
-    //         VALUES (?, ?, ?, ?, ?)`,
-    //             [user.user_name, user.first_name, user.last_name, user.password, user.email]);
-
-    //         return { ...user, id: res.insertId };
-    //     } catch (error) {
-    //         console.log(error);
-    //         return error;
-    //     }
-    // }
-
-    // async addPost(post) {
-    //     try {
-    //         const res = await this.pool.query(`
-    //         INSERT INTO posts (user_id, title, body) 
-    //         VALUES (?, ?, ?)`, [post.user_id, post.title, post.body]);
-    //         return { ...post, id: res.insertId };
-    //     } catch (error) {
-    //         console.log(error);
-    //         return error;
-    //     }
-    // }
-
-    // async addComment(comment) {
-    //     try {
-    //         const res = await this.pool.query(`
-    //         INSERT INTO comments (post_id, name, email, body)
-    //          VALUES (?, ?, ?, ?)`,
-    //             [comment.post_id, comment.name, comment.email, comment.body]);
-
-    //         return { ...comment, id: res.insertId };
-    //     } catch (error) {
-    //         console.log(error);
-    //         return error;
-    //     }
-    // }
-
-    // async addTodo(todo) {
-    //     try {
-    //         const res = await this.pool.query(`
-    //         INSERT INTO todos (user_id, title, is_completed)
-    //          VALUES (?, ?, ?)`, [todo.user_id, todo.title, todo.is_completed]);
-    //         return { ...todo, id: res.insertId };
-    //     } catch (error) {
-    //         console.log(error);
-    //         return error;
-    //     }
-    // }
-
-
-    // async getUser(user) {
-    //     try {
-    //         const [[result]] = await this.pool.query(`
-    //         SELECT * FROM users
-    //         WHERE user_name = ? AND password = ?`,
-    //             [user.user_name, user.password]);
-    //        console.log(result);
-           
-    //             return result;
-
-    //     } catch (error) {
-    //         console.error(error);
-    //         return error;
-    //     }
-    // }
-
-    // async checkUser(user_id) {
-    //     try {
-    //         const [result] = await this.pool.query(`SELECT * FROM users
-    //          WHERE id = ${user_id}`);
-    //         return result;
-    //     } catch (error) {
-    //         console.error(error);
-    //         return "error, Unregistered user!!";
-    //     }
-    // }
-    // async getComments(post_id) {
-    //     try {
-    //         const [result] = await this.pool.query(`SELECT * FROM comments
-    //          WHERE post_id = ${post_id}`);
-    //         return result;
-    //     } catch (error) {
-    //         console.error(error);
-    //         return "error, dont have comments for this post";
-    //     }
-    // }
-    // async getTodosByUserId(userId) {
-    //     try {
-    //         const [result] = await this.pool.query(`SELECT * FROM todos WHERE user_id = ?`, [userId]);
-    //         return result;
-    //     } catch (error) {
-    //         console.error(error);
-    //         return error;
-    //     }
-    // }
-    // async getPostsByUserId(userId) {
-    //     try {
-    //         const [result] = await this.pool.query(`SELECT * FROM posts WHERE user_id = ?`, [userId]);
-    //         return result;
-    //     } catch (error) {
-    //         console.error(error);
-    //         return error;
-    //     }
-    // }
-    // //
-    // async changeStatusTodo( taskId) {
-    //     try {
-    //         const res = await this.pool.query(
-    //             `UPDATE todos 
-    //         SET is_completed = NOT is_completed 
-    //         WHERE id = ? `,
-    //             [ taskId]);
-    //             return res;
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-    // async deleteById(id, table) {
-    //     try {
-    //         const res = await this.pool.query(`DELETE FROM ${table} WHERE id = ?`, [id]);
-    //         return `Record with ID ${id} deleted successfully!`;
-    //     } catch (error) {
-    //         console.error(error);
-    //         return error;
-    //     }
-    // }

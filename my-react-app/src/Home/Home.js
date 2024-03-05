@@ -5,9 +5,9 @@ import Article from '../component/Article';
 function Home() {
     const [articleData, setArticleData] = useState(null);
     const [error, setError] = useState(null);
-
     useEffect(() => {
         const fetchData = async () => {
+            
             try {
                 const response = await axios.get('/home');
                 setArticleData(response.data);

@@ -7,7 +7,8 @@ function News() {
   const [arrArticles, setArrArticles] = useState([]);
 
   useEffect(() => {
-    
+    console.log("kkkkkk");
+
     axios.get('/news') 
       .then(response => {
         console.log(response.data);
