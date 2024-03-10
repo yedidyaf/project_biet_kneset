@@ -1,4 +1,4 @@
-import dbFunctions from '../DataB.js';
+import dbFunctions from '../DatabaseFunctions/Donations.js';
 import multer from 'multer';
 
 import express from 'express';

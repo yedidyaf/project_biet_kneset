@@ -21,6 +21,23 @@ const MembersG = () => {
       const response = await axios.get('/gabai/members');
       setMembersData(response.data);
     } catch (error) {
+      console.error('Error fetching article:', error);
+    
+        if (error.response && error.response.data && error.response.data.error) {
+          const errorMessage = error.response.data.error;
+    
+          if (errorMessage === 'Authentication failed: Missing token') {
+            console.log(errorMessage);
+            navigate('/gabai/login');
+          } else if (errorMessage === 'Forbidden: Invalid role') {
+            console.log(errorMessage);
+            navigate('/gabai/login');
+          } else {
+            console.log(errorMessage);
+            navigate('/gabai/login');
+
+          }
+        } 
       console.error(error);
       if(error.response.data.error==='Authentication failed: Missing token'){
         navigate('/gabai/login');
@@ -41,8 +58,7 @@ fetchMembersData()
         return prevData.map((member) => {
           if (member.id === memberId) {
             
-
-            return { ...member, };
+            return { ...member };
           }
           return member;
         });
@@ -50,6 +66,23 @@ fetchMembersData()
     } catch (error) {
       console.error(error);
       setError('אירעה שגיאה בהוספת הגבאי. נסה שוב מאוחר יותר.');
+      console.error('Error fetching article:', error);
+    
+        if (error.response && error.response.data && error.response.data.error) {
+          const errorMessage = error.response.data.error;
+    
+          if (errorMessage === 'Authentication failed: Missing token') {
+            console.log(errorMessage);
+            navigate('/gabai/login');
+          } else if (errorMessage === 'Forbidden: Invalid role') {
+            console.log(errorMessage);
+            navigate('/gabai/login');
+          } else {
+            console.log(errorMessage);
+            navigate('/gabai/login');
+
+          }
+        } 
     }
   };
 

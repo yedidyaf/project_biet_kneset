@@ -1,4 +1,4 @@
-import dbFunctions from '../DataB.js';
+import dbFunctions from '../DatabaseFunctions/News.js';
 import multer from 'multer';
 import { format } from 'date-fns';
 

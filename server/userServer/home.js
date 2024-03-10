@@ -1,10 +1,10 @@
-import dbFunctions from '../../server/DataB.js';
+import ArticalHome from '../DatabaseFunctions/ArticalHome.js';
 import express  from 'express';
 const router = express.Router();
 
 router.get("/", async (req, res) => {
     try {
-        const article = await dbFunctions.getArticalHome();
+        const article = await ArticalHome.getArticalHome();
         res.status(200).send(article);
     } catch (error) {
         console.error(error);

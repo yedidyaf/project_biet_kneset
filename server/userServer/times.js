@@ -1,4 +1,4 @@
-import dbFunctions from '../DataB.js';
+import dbFunctions from '../DatabaseFunctions/Times.js';
 import express from 'express';
 const router = express.Router();
 

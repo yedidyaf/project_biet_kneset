@@ -1,4 +1,4 @@
-import dbFunctions from '../DataB.js';
+import dbFunctions from '../DatabaseFunctions/ArticalHome.js';
 import multer from 'multer';
 import express from 'express';
 const router = express.Router();

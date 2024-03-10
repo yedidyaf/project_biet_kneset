@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import dbFunctions from './DataB.js';
+import dbFunctions from './DatabaseFunctions/Times.js';
 import cron from 'node-cron';
 
 
