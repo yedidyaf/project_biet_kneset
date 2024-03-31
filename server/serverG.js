@@ -81,21 +81,21 @@ app.use("/api/gabai/login", loginRoutes);
 
 
 
-// app.get('/api/getImage', async (req, res) => {
-//     const imagePath = req.query.path;
-//     console.log(imagePath);
-//     try {
-//         const imageBuffer = await fs.readFile(imagePath);
+app.get('/api/getImage', async (req, res) => {
+    const imagePath = req.query.path;
+    console.log(imagePath);
+    try {
+        const imageBuffer = await fs.readFile(imagePath);
 
-//         res.writeHead(200, {
-//             'Content-Type': 'image/png',
-//             'Content-Length': imageBuffer.length,
-//         });
-//         res.end(imageBuffer);
-//     } catch (error) {
-//         console.error('שגיאה בקריאת התמונה:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+        res.writeHead(200, {
+            'Content-Type': 'image/png',
+            'Content-Length': imageBuffer.length,
+        });
+        res.end(imageBuffer);
+    } catch (error) {
+        console.error('שגיאה בקריאת התמונה:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 app.listen(port);

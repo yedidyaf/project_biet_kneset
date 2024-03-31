@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/", async (req, res) => {
     try {
         const response = await dbFunctions.checkGabai(req.body);
-         
+         console.log(response);
         if (response) {
            
             const secretKey = process.env.SECRET_KEY;

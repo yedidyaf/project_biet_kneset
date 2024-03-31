@@ -65,14 +65,15 @@ class Gabais extends DatabaseFunctions {
         `);
             return result;
         } catch (error) {
-            console.error(error);
-            return error;
+            throw error;
+            
         }
     }
     async checkGabai(credentials) {
+    
         console.log(credentials);
         try {
-            const [result] = await pool.query(`
+            const [result] = await this.pool.query(`
                 SELECT * FROM gabais
                 WHERE user_id = ? AND password = ?`,
                 [credentials.user_id, credentials.password]);

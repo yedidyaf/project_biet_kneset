@@ -17,6 +17,7 @@ const Login = () => {
       );
 
 if (response.status === 200) {
+  console.log("lllllllllllllllllllllllll");
   Cookies.set('token', response.data.token, { expires: 1, path: '/' });
   Cookies.set('user_id', response.data.user_id, { expires: 1, path: '/' });
   const gabaiName = Cookies.get('user_id');
