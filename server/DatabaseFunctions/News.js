@@ -2,6 +2,19 @@ import DatabaseFunctions from './DatabaseFunctions.js';
 
 class News extends DatabaseFunctions {
 
+    async getNew(id) {
+        console.log("lplplpllplplpp");
+
+        try {
+            const [result] = await this.pool.query(`
+                SELECT * FROM news WHERE id = ?`,[id]);
+            return result;
+        } catch (error) {
+            console.error(error);
+            return error;
+        }
+    }
+    
     async getNews() {
         try {
             const [result] = await this.pool.query(`SELECT * FROM news`);

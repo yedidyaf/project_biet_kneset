@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from '../component/Axios.js';
-import Article from "../../component/Article";
 import ChangeArticleG from './ChangeArticalG';
 import { useNavigate } from 'react-router-dom';
+import ArticleHome from '../../Home/ArticleHome.js';
+import ImageCarousel from '../../component/ImageCarousel.js';
+// import '../../assets/css/HomeG.css'
 
 const HomeG = () => {
   const [isChange, setIsChange] = useState(false);
@@ -10,18 +12,18 @@ const HomeG = () => {
   const [newA, setNewA] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    
+
     axios.get('gabai/home')
       .then(response => {
         setArticle(response.data);
-        
+
       })
       .catch(error => {
         console.error('Error fetching article:', error);
-    
+
         if (error.response && error.response.data && error.response.data.error) {
           const errorMessage = error.response.data.error;
-    
+
           if (errorMessage === 'Authentication failed: Missing token') {
             console.log(errorMessage);
             navigate('/gabai/login');
@@ -33,7 +35,7 @@ const HomeG = () => {
             navigate('/gabai/login');
 
           }
-        } 
+        }
       });
   }, [newA, isChange]);
   const onAddArticle = () => {
@@ -41,12 +43,8 @@ const HomeG = () => {
   }
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          setIsChange((prev) => !prev)}}
-          >שנה כתבה
-      </button>
+    <div >
+
 
       {isChange && <ChangeArticleG
         title={"שנה כתבה"}
@@ -54,14 +52,34 @@ const HomeG = () => {
         article={article}
         isChange={() => setIsChange(false)}
         path={'/gabai/home'} />}
+
       {article ? (
-        <Article article={article} />
+        <ImageCarousel images={article.images} />
+      ) : (
+        <p>Loading article...</p>
+      )}
+      <br />
+      <br />
+
+      <div className="center-container">
+        <button
+          className='change-article-btn'
+          onClick={() => {
+            setIsChange((prev) => !prev)
+          }}
+        >
+          שנה כתבה
+        </button>
+      </div>
+
+      {article ? (
+        <ArticleHome article={article} />
       ) : (
         <p>Loading article...</p>
       )}
       <br />
 
-      
+
     </div>
   );
 };

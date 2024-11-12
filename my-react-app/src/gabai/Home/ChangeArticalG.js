@@ -1,17 +1,18 @@
-// AddArticleG.jsx
-import React, { useRef, useState } from 'react';
-import '../../assets/css/AddArticleG.css';
+import React, { useState } from 'react';
+// import '../../assets/css/AddArticleG.css';
 import axios from '../component/Axios';
 import ChangeImages from './ChangeImages';
 
-const ChangeArticleG = ({ article, onAddArticle, path, isChange, }) => {
+const ChangeArticleG = ({ article, onAddArticle, path, isChange }) => {
   const [articleData, setArticleData] = useState({
-    title: article.title,
-    content: article.content,
-    images: article.images,
-    author: article.author,
+    title: article.title || '',
+    content: article.content || '',
+    images: article.images || [],
+    author: article.author || '',
   });
   const [images, setImages] = useState([]);
+  const [toDelete, setToDelete] = useState([]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setArticleData((prevData) => ({
@@ -20,40 +21,37 @@ const ChangeArticleG = ({ article, onAddArticle, path, isChange, }) => {
     }));
   };
 
-  const [toDelete, setToDelete] = useState([]);
-
   const handleImageChange = (e) => {
     const selectedImages = Array.from(e.target.files);
-
     setImages((prevImages) => [...prevImages, ...selectedImages]);
   };
-  console.log(articleData, images);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-
-    console.log(images);
-    images.forEach((image, index) => {
-      formData.append(`images`, image);
+    images.forEach((image) => {
+      formData.append('images', image);
     });
-
-    formData.append("title", articleData.title);
-    formData.append("author", articleData.author);
-    formData.append("content", articleData.content);
-    console.log(formData.get("title"));
+    formData.append('toDelete', JSON.stringify(toDelete));
+    formData.append('title', articleData.title);
+    formData.append('author', articleData.author);
+    formData.append('content', articleData.content);
+    if(images.length > 4){
+      alert('ניתן להעלות רק חמש תמונות');
+      setImages([])
+      return;
+    }
     try {
-      const response = await axios.post(path, formData, {
+      const response = await axios.put(path, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       });
       console.log(response);
       onAddArticle();
-      isChange()
+      isChange();
     } catch (error) {
-      console.error('שגיאה בעדכון המאמר:', error);
+      console.error('Error updating article:', error);
     }
 
     setArticleData({
@@ -62,13 +60,14 @@ const ChangeArticleG = ({ article, onAddArticle, path, isChange, }) => {
       author: '',
     });
     setImages([]);
+    setToDelete([]);
   };
 
   return (
     <form className="add-article-form" onSubmit={handleSubmit}>
-      <h3 > שנה כתבה</h3>
+      <h3>Update Article</h3>
       <label>
-        כותרת:
+        Title:
         <input
           type="text"
           name="title"
@@ -77,7 +76,7 @@ const ChangeArticleG = ({ article, onAddArticle, path, isChange, }) => {
         />
       </label>
       <label>
-        תוכן:
+        Content:
         <textarea
           name="content"
           value={articleData.content}
@@ -85,31 +84,28 @@ const ChangeArticleG = ({ article, onAddArticle, path, isChange, }) => {
         />
       </label>
       <label>
-        תמונות (עד 5):
+        Images (up to 5):
         <input
           type="file"
-          name='images'
+          name="images"
           accept="image/*"
           multiple
           onChange={handleImageChange}
         />
       </label>
-      <ChangeImages
-        setToDelete={setToDelete}
-        images={articleData.images}
+      <ChangeImages 
+      setToDelete={setToDelete} 
+      images={articleData.images || []} 
       />
       {images.map((image, index) => (
         <div key={index} className="image-preview">
-          <img src={URL.createObjectURL(image)} alt={`תמונה ${index}`} />
+          <img src={URL.createObjectURL(image)} alt={`Preview ${index}`} />
           <span>{image.name}</span>
         </div>
       ))}
-
-      <button type="submit">שנה</button>
+      <button type="submit">Update</button>
     </form>
   );
 };
-
-
 
 export default ChangeArticleG;

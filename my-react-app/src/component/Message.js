@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/css/Message.css'
+// import '../assets/css/Message.css'
 const Message = ({ message, onClose }) => {
 
   return (

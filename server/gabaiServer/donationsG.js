@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
 router.post("/", upload.single('file'), async (req, res) => {
     try {
 
-        const savedImagePath = 'C:\\Users\\user\\Desktop\\project_biet_kneset\\server\\images\\' + req.file.originalname;
+        const savedImagePath = 'C:\\Users\\User\\Documents\\.html\\project_biet_kneset\\server\\images\\' + req.file.originalname;
 
         const updatedDonation = {
             ...req.body,
@@ -47,7 +47,7 @@ router.post("/", upload.single('file'), async (req, res) => {
 router.put('/:id', upload.single('file'), async (req, res) => {
     try {
 
-        const savedImagePath = 'C:\\Users\\user\\Desktop\\project_biet_kneset\\server\\images\\' + req.file.originalname;
+        const savedImagePath = 'C:\\Users\\User\\Documents\\.html\\project_biet_kneset\\server\\images' + req.file.originalname;
         console.log(savedImagePath);
 
         const updatedDonation = {

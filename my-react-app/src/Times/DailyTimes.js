@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../component/Axios';
 import { DateTime } from 'luxon';
-import '../assets/css/DailyTimes.css';
+// import '../assets/css/DailyTimes.css';
 import DateH from '../gabai/Times/DateH';
 
 const DailyTimes = () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from './component/Axios';
-import '../assets/css/GabaiList.css'
+// import '../assets/css/GabaiList.css'
 import { useNavigate } from 'react-router-dom';
 
 const GabaiList = () => {
@@ -50,7 +50,10 @@ const GabaiList = () => {
         }
     };
     const handleDelete = async (id) => {
-        console.log(id);
+        const isConfirmed = window.confirm('האם אתה בטוח שאתה רוצה למחוק את הגבאי?');
+    if (!isConfirmed) {
+      return;
+    }
         try {
             await axios.delete(`/gabai/gabais/${id}`);
             fetchGabais()

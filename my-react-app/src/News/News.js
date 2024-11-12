@@ -11,9 +11,7 @@ function News() {
 
     axios.get('/news') 
       .then(response => {
-        console.log(response.data);
         setArrArticles(response.data);
-        console.log("kkkkkk");
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -21,7 +19,7 @@ function News() {
   }, []);
 
   return (
-    <AllCards title="חדשות" cardsData={arrArticles} />
+    <AllCards title="" cardsData={arrArticles} />
   );
 }
 

@@ -26,11 +26,22 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/:id", async (req, res) => {
+    console.log("kkk");
+    try {
+        const article = await dbFunctions.getNew(req.params.id);
+        res.status(200).send(article[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 router.post("/", upload.array('images', 5), async (req, res) => {
     try {
 
         const savedImagePaths = req.files.map((file) => {
-            const imagePath = 'C:\\Users\\user\\Desktop\\project_biet_kneset\\server\\images\\' + file.originalname;
+            const imagePath = 'C:\\Users\\User\\Documents\\.html\\project_biet_kneset\\server\\images\\' + file.originalname;
             return imagePath;
         });
 

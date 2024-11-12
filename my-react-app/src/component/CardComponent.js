@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../component/Axios';
-import '../assets/css/CardComponent.css';
+// import '../assets/css/CardComponent.css';
 
 const CardComponent = ({ data, onClick }) => {
   const { id, title, content, author, images } = data;
@@ -21,7 +21,6 @@ const [image, setImage] = useState(null);
       const blob = new Blob([response.data], { type: 'image/png' });
 
       const imageUrl = URL.createObjectURL(blob);
-      console.log(imageUrl);
        setImage(imageUrl);
     } catch (error) {
       console.error('שגיאה בקבלת התמונה מהשרת:', error);

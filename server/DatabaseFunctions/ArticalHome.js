@@ -4,19 +4,20 @@ class ArticalHome extends DatabaseFunctions {
     async getArticalHome() {
         try {
             const [[result]] = await this.pool.query(`SELECT * FROM artical_home`);
+            console.log(result);
             return result;
         } catch (error) {
             console.error(error);
             return error;
         }
     }
-    async putArticalHome( article) {
+    async putArticalHome(article) {
         try {
             const res = await this.pool.query(`
                 UPDATE artical_home 
                 SET title = ?, content = ?, images = ?
                 WHERE id = ?`,
-                [article.title, article.content, article.images, 2]);
+                [article.title, article.content, article.images, 3]);
     
             if (res.affectedRows === 0) {
                 throw new Error(`Article with ID ${id} not found`);

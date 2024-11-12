@@ -8,11 +8,11 @@ import { format } from 'date-fns';
 import nodemialer from 'nodemailer'
 import jwt from 'jsonwebtoken';
 const app = express();
-console.log("The server file User is working");
 const port = process.env.PORT || 5050;
 app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
+    
     next();
 });
 

@@ -12,7 +12,7 @@ import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 
 const app = express();
-console.log("The server file is working");
+console.log("The server file is working 4000");
 const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json())

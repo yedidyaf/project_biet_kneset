@@ -41,7 +41,9 @@ const ChangeImages = ({ images, setToDelete }) => {
       return <div key={index} className="image-preview">
         <img src={image} alt={`תמונה ${index}`} />
         <p onClick={() => {
+        
           setToDelete(prev => [...prev, index])
+        
         }}>מחק</p>
       </div>
     })}

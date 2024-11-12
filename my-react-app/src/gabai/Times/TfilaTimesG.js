@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from '../component/Axios';
 
-import '../../assets/css/TfilaTimes.css';
+// import '../../assets/css/TfilaTimes.css';
 import TfilaTimesForm from "./TfilaTimesForm";
 
 const TfilaTimesG = () => {

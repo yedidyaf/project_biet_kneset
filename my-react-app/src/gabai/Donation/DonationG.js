@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../assets/css/Donations.css';
+// import '../../assets/css/Donations.css';
 import Gallery from '../../component/Gallery';
 import Message from '../../component/Message';
 

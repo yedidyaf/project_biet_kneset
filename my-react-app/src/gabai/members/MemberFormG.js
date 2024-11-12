@@ -1,6 +1,6 @@
 // MemberForm.jsx
 import React, { useState } from 'react';
-import '../../assets/css/MemberForm.css';
+// import '../../assets/css/MemberForm.css';
 import axios from '../component/Axios';
 import { useNavigate } from 'react-router-dom';
 import joi from 'joi';

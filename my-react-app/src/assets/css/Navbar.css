@@ -1,78 +1,130 @@
 .navbar {
-  position: fixed;
-   top: 10px;
-  right: 0;
-  left: 0; 
-  background-color: #080808; 
-  z-index: 1000; 
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  
+  background-color: #f8f8f8;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.logo-container {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: scale(1.05);
+}
+
 .logo {
-  position: fixed;
-  top: 10px;
-  right: 60px;
-  width: 10%;
-  border: 5px solid #e67e22; 
-  border-radius: 50%;
-  padding: 3px;
+  width: 50px;
+  height: auto;
 }
-main {
-  
-  margin-top: 100px;
+
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.menu-toggle .bar {
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  transition: all 0.3s;
+}
+
+.nav-links {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.nav-links.open {
+  display: flex;
 }
 
 .nav-btn {
-  
-  display: inline-block;
-  padding: 10px 15px;
-  color: #151514;
-  margin: 10px; 
-  background-color: #5a79e9;
-  
   text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px; 
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
 }
 
-.nav-btn:hover {
-  background-color: #996d21; 
+.nav-btn:hover, .nav-btn:focus {
+  background-color: #e0e0e0;
 }
 
-
-.prayer-times {
-  background-color: #161111;
-  padding: 20px;
+.nav-btn.active {
+  background-color: #4a90e2;
+  color: white;
 }
 
+/* ... שאר ה-CSS נשאר זהה */
 
+@media screen and (min-width: 768px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
 
+  .navbar-top {
+    margin-bottom: 0;
+  }
 
-.logo-container {
-  float: right;
-  margin-right: 20px;
-}
-.nav-links {
-  float: left;
-  margin-left: 20px; 
-  position: fixed;
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    gap: 1.5rem;
+  }
+
+  .nav-btn {
+    width: auto;
+  }
 }
 .footer-info {
-  padding: 20px; 
-  background-color: #1b1717;
-  text-align: center; 
-  color: #f4f1f1;
+  background-color: #f8f8f8; /* צבע רקע תואם ל-navbar */
+  padding: 1rem;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.1); /* הצללה עדינה למראה שקט */
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 .footer-info p {
-  margin: 8px 0; 
+  margin: 0.5rem 0; /* רווח בין השורות */
+  color: #333; /* צבע טקסט תואם ל-navbar */
 }
-.user-name {
-  position: fixed;
-  margin-left: 40px;
-  color: #080808;
-  top: 20px;
-  left: 20px; 
-  background-color: #5a79e9 ;
+
+.footer-info a {
+  color: #4a90e2; /* צבע קישורים תואם ל-navbar */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-info a:hover, .footer-info a:focus {
+  text-decoration: underline;
 }

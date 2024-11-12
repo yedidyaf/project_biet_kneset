@@ -1,0 +1,51 @@
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-track {
+  display: flex;
+  width: calc(200% + 10px); /* תמונות + רווח בין */
+  animation: scroll 14s linear infinite;
+}
+
+.slide {
+  flex: 0 0 300px;
+  padding: 10px;
+}
+
+.slide img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* התאמות למכשירים ניידים */
+@media (max-width: 768px) {
+  .slide {
+    flex: 0 0 200px;
+  }
+  .slide img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    flex: 0 0 150px;
+  }
+  .slide img {
+    height: 150px;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CardComponent from '../../component/CardComponent';
 import Article from '../../component/Article';
-import '../../assets/css/AllCards.css';
+// import '../../assets/css/AllCards.css';
 import axios from '../component/Axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const AllCardsG = ({ title, AddArticle }) => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [cardsData, setCardsData] = useState([]);
   const [newA, setNewA] = useState(true);
-  console.log("kkkkkk");
+
   useEffect(() => {
     axios.get('/gabai/news')
       .then(response => {
@@ -41,23 +41,17 @@ const AllCardsG = ({ title, AddArticle }) => {
   }
 
   const handleCardClick = (data) => {
-    setSelectedArticle(data);
+    navigate(`/gabai/news/${data.id}`);
   };
 
-  const handleCloseArticle = () => {
-    setSelectedArticle(null);
-  };
+  
 
   return (
     <div className="all-cards">
       {!selectedArticle&& <h1 className="all-cards-title">{title}</h1>}
-      <div className="cards-container">
-       
-      </div>
+      
 
-      {selectedArticle ? (
-        <Article article={selectedArticle} onClose={handleCloseArticle} deleteArtical={deleteArtical} />
-      ) : <div className="cards-container">
+      { <div className="cards-container">
         {cardsData.map((card) => (
           <CardComponent key={card.id} data={card} onClick={() => handleCardClick(card)} />
         ))}</div>}

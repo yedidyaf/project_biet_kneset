@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from '../component/Axios';
-import '../assets/css/Gallery.css';
 
 const Gallery = ({ images }) => {
   const [arrImages, setArrImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -13,17 +13,15 @@ const Gallery = ({ images }) => {
         const fetchedImages = await Promise.all(
           images.map(async (imagePath) => {
             const response = await axios.get('/api/getImage', {
-              params: {
-                path: imagePath,
-              },
+              params: { path: imagePath },
               responseType: 'arraybuffer',
             });
-
             const imageUrl = URL.createObjectURL(new Blob([response.data], { type: 'image/png' }));
+            console.log(imageUrl);
+            
             return imageUrl;
           })
         );
-
         setArrImages(fetchedImages);
         setLoading(false);
       } catch (error) {
@@ -31,19 +29,8 @@ const Gallery = ({ images }) => {
         setLoading(false);
       }
     };
-
     fetchImages();
   }, [images]);
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevImage = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const nextImage = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, arrImages.length - 1));
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -51,19 +38,20 @@ const Gallery = ({ images }) => {
 
   return (
     <div className="gallery">
-      {images.length > 1 && currentIndex > 0 && (
-  <button className="prev" onClick={prevImage}>
-    &#10094;
-  </button>
-)}
-
-      <img src={arrImages[currentIndex]} className="gallery-image" alt={`Gallery Image ${currentIndex}`} />
-
-      {images.length > 1 && currentIndex < arrImages.length - 1 && (
-  <button className="next" onClick={nextImage}>
-    &#10095;
-  </button>
-)}
+      {arrImages.map((src, index) => (
+        <img
+          key={index}
+          src={src}
+          className={`gallery-image ${index === currentIndex ? 'active' : ''}`}
+          alt={`תמונה ${index + 1}`}
+        />
+      ))}
+      <button className="prev" onClick={() => setCurrentIndex((prevIndex) => (prevIndex - 1 + arrImages.length) % arrImages.length)}>
+        &#10094;
+      </button>
+      <button className="next" onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % arrImages.length)}>
+        &#10095;
+      </button>
     </div>
   );
 };

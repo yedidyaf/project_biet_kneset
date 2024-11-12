@@ -2,7 +2,7 @@
   
   background: linear-gradient(to right, #c7a708, #e4c496); 
   padding: 40px;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 40px;  
  
   width: 80%;
@@ -10,13 +10,16 @@
 
 .frame {
   background: rgba(255, 255, 255, 0.3); 
-  border-radius: 100px;
+  border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   padding: 70px;  
   transition: transform 0.3s ease;  
   
 }
-
+tr {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 70px;  
+}
 .frame:hover {
   transform: translateY(-5px); 
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);

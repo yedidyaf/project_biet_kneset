@@ -15,6 +15,8 @@ import NavbarG from '../gabai/Layouts/NavbarG';
 import Login from '../gabai/Layouts/Login';
 import GabaiList from '../gabai/GabaiList';
 import '../assets/css/Main.css'
+import Article from '../component/Article';
+import ArticleG from '../gabai/News/ArticaleG';
 function Main() {
 
     
@@ -26,6 +28,7 @@ function Main() {
                 <Route path="/" element={<Navbar/>}>
                     <Route path="/home" element={<Home/>} />
                     <Route path='/news' element={<News/>} />
+                    <Route path="/news/:id" element={<Article/>} />
                     <Route path='/times' element={<Times/>} />
                     <Route path='/donations' element={<Donations/>} />
                     <Route path='/members' element={<Members/>} />
@@ -35,6 +38,7 @@ function Main() {
                     
                     <Route path="/gabai/home" element={<HomeG/>} />
                     <Route path='/gabai/news' element={<NewsG/>} />
+                    <Route path='/gabai/news/:id' element={<ArticleG/>} />
                     <Route path='/gabai/times' element={<TimesG/>} />
                     <Route path='/gabai/donations' element={<DonationsG/>} />
                     <Route path='/gabai/members' element={<MembersG/>} />

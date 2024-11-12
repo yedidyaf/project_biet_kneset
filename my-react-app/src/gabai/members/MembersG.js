@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../component/Axios'; 
 
-import '../../assets/css/Members.css';
+// import '../../assets/css/Members.css';
 import MemberFormG from './MemberFormG';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,5 +1,7 @@
 import dbFunctions from '../DatabaseFunctions/Members.js';
 import express from 'express';
+import { sendMail } from '../mailes/sendEmail.js';
+import { emailTemplates } from '../mailes/emailTemplates.js';
 const router = express.Router();
 
 
@@ -17,6 +19,8 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         const response = await dbFunctions.setMember({ ...req.body, is_v: 1 });
+        console.log(response);
+        sendMail(response.email, emailTemplates.approval(response.first_name, response.last_name))
         res.status(200).json(response);
     } catch (error) {
         if (error.message.includes("already exists")) {
@@ -29,19 +33,18 @@ router.post("/", async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const response = await dbFunctions.putMember(req.params.id);
-        res.status(200);
-        res.send(response);
+        sendMail(response.email, emailTemplates.approval(response.first_name, response.last_name))
+        res.status(200).send(response);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-
 router.delete('/:id', async (req, res) => {
     try {
         const response = await dbFunctions.deleteMember(req.params.id);
-        res.status(200);
-        res.send(response);
+        sendMail(response.email, emailTemplates.rejection(response.first_name, response.last_name))
+        res.status(200).send(response);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });

@@ -40,29 +40,41 @@ class Members extends DatabaseFunctions {
         try {
             const res = await this.pool.query(`
                 UPDATE members 
-                SET  is_v = 1
+                SET is_v = 1
                 WHERE id = ?`,
-                [ id]);
-    
+                [id]);
+            
             if (res[0].affectedRows === 0) {
                 throw new Error(`Member with ID ${id} not found`);
             }
-    
-            return { ...member, id };
+            
+            const [updatedMember] = await this.pool.query(`
+                SELECT * FROM members
+                WHERE id = ?`,
+                [id]);
+            
+            return updatedMember[0];
         } catch (error) {
+            console.error(error);
             return error;
         }
     }
     
+    
     async deleteMember(id) {
         try {
+            const [updatedMember] = await this.pool.query(`
+                SELECT * FROM members
+                WHERE id = ?`,
+                [id]);
+            
             const res = await this.pool.query(`DELETE FROM members WHERE id = ?`, [id]);
     
             if (res.affectedRows === 0) {
                 throw new Error(`Member with ID ${id} not found`);
             }
-    
-            return `Member with ID ${id} deleted successfully!`;
+            
+            return updatedMember[0];
         } catch (error) {
             console.error(error);
             return error;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import '../../assets/css/Login.css'; 
+// import '../../assets/css/Login.css'; 
 import axios from '../component/Axios';
 import Cookies from 'js-cookie'; 
 const Login = () => {

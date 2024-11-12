@@ -1,0 +1,32 @@
+/* בסגנונות של react-slick */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+/* סגנונות נוספים לקרוסלה */
+.carousel-container {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .slick-slide {
+    padding: 0 10px; /* רווח בין התמונות */
+    box-sizing: border-box; /* וודא שה-padding לא ישנה את גודל התמונות */
+  }
+  
+  .slick-slide img {
+    height: 300px; /* גובה קבוע */
+    width: 100%; /* רוחב קבוע בהתאם לקונטיינר */
+    object-fit: cover; /* להתאים את התמונה למסגרת */
+    border-radius: 10px; /* החזרת הרדיוס */
+  }
+  
+  .slick-prev, .slick-next {
+    z-index: 1;
+  }
+  
+  .slick-dots li button:before {
+    color: #000000;
+  }
+  
+  
