@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import '../../assets/css/AddArticleG.css';
+import '../../assets/css/AddArticleG.css';
 import axios from '../component/Axios';
 import ChangeImages from './ChangeImages';
 

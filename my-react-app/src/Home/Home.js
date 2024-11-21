@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../component/Axios';
-// import Article from '../component/Article';
 import ArticleHome from './ArticleHome';
 import "../assets/css/Home.css"
-// import ImageSlider from '../component/ImageSlider';
-// import ImageCarousel from '../component/ImageCarousel';
 import GalleryCarousel from '../component/GalleryCarousel';
 
 function Home() {

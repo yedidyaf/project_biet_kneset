@@ -1,25 +1,118 @@
-/* Times.css */
-
+/* Main container */
 .times-container {
-  text-align: center;
   display: flex;
+  flex-direction: row-reverse;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  direction: rtl;
 }
 
-.tfila-timess{
-  width: 70%;
-}
-.daily-timess {
- width: 20%;
-}
-.tfila-timess {
-  text-align:center;
+/* Prayer times section - takes up most of the space */
+.tfila-times {
+  flex: 1;
+  min-width: 0;
 }
 
-.daily-timess {
-  text-align:right;
+/* Daily times section - fixed width sidebar */
+.daily-times {
+  width: 300px;
+  flex-shrink: 0;
 }
-.times-container {
+
+/* Common styles for both sections */
+.prayer-times, .daily-times {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+/* Headers */
+.title {
+  color: #2c3e50;
   text-align: center;
-  display: flex; 
-  justify-content: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+h3 {
+  color: #34495e;
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 1.25rem;
+}
+
+h4 {
+  color: #7f8c8d;
+  text-align: center;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Frame for weekday and sabbath sections */
+.frame {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.cell {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+  text-align: center;
+}
+
+tr:last-child .cell {
+  border-bottom: none;
+}
+
+/* Hover effects */
+tr:hover {
+  background-color: #f1f3f5;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .times-container {
+    flex-direction: column;
+  }
+  
+  .daily-times {
+    width: 100%;
+  }
+  
+  .cell {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Custom colors for specific time categories */
+.prayer-times tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+.daily-times tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+/* Add subtle transitions */
+.frame, .cell {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Add a subtle border to separate sections */
+.tfila-times, .daily-times {
+  border: 1px solid #e9ecef;
 }

@@ -23,7 +23,16 @@ const ArticleG = () => {
         setIsLoading(false);
       });
   }, [id]);
-
+  const deleteArtical = (id) => {
+    axios.delete(`/gabai/news/${id}`)
+      .then(response => {
+        console.log(response.data);
+        navigate(`/gabai/news`);        
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -46,8 +55,11 @@ const ArticleG = () => {
           <div className="author">{article.author}</div>
         )}
         <p className="text">{article.content}</p>
-        <button className="close-button" onClick={() => { navigate(`/gabai/news`); }}>
+        <button className="close-button" onClick={() => {navigate(`/gabai/news`); }}>
           סגור
+        </button>
+        <button className="delete-button" onClick={() => {deleteArtical(article.id)} }>
+          הסר כתבה
         </button>
       </div>
     </div>

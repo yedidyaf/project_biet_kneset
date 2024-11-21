@@ -24,7 +24,7 @@
     }
   
     button {
-      background-color: #3498db;
+      background-color: #a68836;
       color: #fff;
       padding: 10px;
       border: none;
@@ -33,7 +33,7 @@
     }
   
     button:hover {
-      background-color: #2980b9;
+      background-color: #c1a75e;
     }
   }
   

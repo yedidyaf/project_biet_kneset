@@ -53,7 +53,7 @@ const AllCardsG = ({ title, AddArticle }) => {
 
       { <div className="cards-container">
         {cardsData.map((card) => (
-          <CardComponent key={card.id} data={card} onClick={() => handleCardClick(card)} />
+          <CardComponent key={card.id} data={card} onClick={() => handleCardClick(card)} deleteArtical={deleteArtical} />
         ))}</div>}
     </div>
   );

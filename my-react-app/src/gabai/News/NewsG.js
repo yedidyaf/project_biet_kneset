@@ -12,7 +12,7 @@ const NewsG = () => {
   }, [addA]);
 
   return (<div>
-    <AllCardsG title={"חדשות"}
+    <AllCardsG title={""}
       AddArticle={onAddArticle} />
     <button onClick={() => { setAddA((prev) => !prev) }}>הוסף כתבה</button>
     {addA && <AddArticleG title={"הוסף כתבה"}
