@@ -7,7 +7,7 @@ import multer from 'multer';
 import handleImages from './handleImages.js';
 import { format } from 'date-fns';
 import nodemialer from 'nodemailer'
-import { fetchData } from './getZmanim.js';
+import { fetchDayTimes } from './getZmanim.js';
 import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 

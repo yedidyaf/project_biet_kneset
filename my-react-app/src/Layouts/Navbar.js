@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { FloatingWhatsApp } from 'react-floating-whatsapp'
 import gabaiAvatar from './logoImage.jpg';
 import { NavLink } from 'react-router-dom';
+import DateH from '../component/DateH';
 
 
 const Navbar = () => {
@@ -38,6 +39,9 @@ const Navbar = () => {
           <span className="bar"></span>
           <span className="bar"></span>
         </button>
+        <div className='date'>
+        <DateH/>
+        </div>
       </div>
       <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <NavLink to="/home" className={({isActive}) => isActive ? "nav-btn active" : "nav-btn"} onClick={toggleMenu}>בית</NavLink>

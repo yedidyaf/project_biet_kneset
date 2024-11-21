@@ -5,6 +5,7 @@ import logo from './logoImage.jpg';
 import Cookies from 'js-cookie';
 import { FloatingWhatsApp } from 'react-floating-whatsapp';
 import gabaiAvatar from './logoImage.jpg';
+import DateH from '../../component/DateH';
 
 const NavbarG = () => {
   const navigate = useNavigate();
@@ -36,6 +37,9 @@ const NavbarG = () => {
             <span className="bar"></span>
             <span className="bar"></span>
           </button>
+          <div className='date'>
+        <DateH/>
+        </div>
         </div>
         <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
           <Link to="/gabai/home" className="nav-btn" onClick={toggleMenu}>בית</Link>

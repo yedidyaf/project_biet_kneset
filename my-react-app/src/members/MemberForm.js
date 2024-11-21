@@ -3,7 +3,7 @@ import '../assets/css/MemberForm.css';
 import axios from '../component/Axios';
 import Joi from "joi";
 
-const MemberForm = ({ addMembers }) => {
+const MemberForm = ({ addMembers , closeForm}) => {
   const [memberData, setMemberData] = useState({
     first_name: '',
     last_name: '',
@@ -38,6 +38,7 @@ console.log(Joi);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    closeForm()
 
     
     try {

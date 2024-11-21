@@ -47,10 +47,10 @@ const Gallery = ({ images }) => {
         />
       ))}
       <button className="prev" onClick={() => setCurrentIndex((prevIndex) => (prevIndex - 1 + arrImages.length) % arrImages.length)}>
-        &#10094;
+      &#10095;
       </button>
       <button className="next" onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % arrImages.length)}>
-        &#10095;
+      &#10094;
       </button>
     </div>
   );

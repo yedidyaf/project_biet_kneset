@@ -113,7 +113,7 @@ const Members = () => {
         {showForm ? 'סגור' : 'הוסף חבר חדש'}
       </button>
 
-      {showForm && <MemberForm addMembers={fetchMembersData} />}
+      {showForm && <MemberForm addMembers={fetchMembersData} closeForm={handleShowForm} />}
     </div>
   );
 };

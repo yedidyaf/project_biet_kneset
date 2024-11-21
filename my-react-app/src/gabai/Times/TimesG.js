@@ -1,6 +1,6 @@
 import DailyTimes from './DailyTimesG';
 import TfilaTimes from './TfilaTimesG'
-// import '../../assets/css/Times.css'
+import '../../assets/css/Times.css'
 
 function TimesG() {
    

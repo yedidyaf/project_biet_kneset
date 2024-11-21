@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../component/Axios.js';
 import ChangeArticleG from './ChangeArticalG';
 import { useNavigate } from 'react-router-dom';
 import ArticleHome from '../../Home/ArticleHome.js';
-import ImageCarousel from '../../component/ImageCarousel.js';
 import GalleryCarousel from '../../component/GalleryCarousel.js';
-// import '../../assets/css/HomeG.css'
+import '../../assets/css/HomeG.css'
 
 const HomeG = () => {
   const [isChange, setIsChange] = useState(false);
