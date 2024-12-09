@@ -1,7 +1,7 @@
 // AllCards.jsx
 import React, { useState } from 'react';
 import CardComponent from './CardComponent';
-import Article from './Article';
+// import Article from './Article';
 import '../assets/css/AllCards.css';
 import { useNavigate } from 'react-router-dom';
 

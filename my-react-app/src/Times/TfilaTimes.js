@@ -1,4 +1,3 @@
-// TfilaTimes.jsx
 import React, { useState, useEffect } from "react";
 import axios from '../component/Axios';
 
@@ -15,10 +14,13 @@ const TfilaTimes = () => {
     try {
       const response = await axios.get('/times');
       const fetchedArrTfilaTimes = response.data;
-      const fetchedWeekday = fetchedArrTfilaTimes.filter(x => !x.is_sabbath);
-      const fetchedSabbath = fetchedArrTfilaTimes.filter(x => x.is_sabbath);
       
-      setArrTfilaTimes(fetchedArrTfilaTimes);
+      // Sort the arrays chronologically before filtering
+      const sortedTimes = sortPrayerTimes(fetchedArrTfilaTimes);
+      const fetchedWeekday = sortedTimes.filter(x => !x.is_sabbath);
+      const fetchedSabbath = sortedTimes.filter(x => x.is_sabbath);
+      
+      setArrTfilaTimes(sortedTimes);
       setWeekday(fetchedWeekday);
       setSabbath(fetchedSabbath);
     } catch (error) {
@@ -26,11 +28,35 @@ const TfilaTimes = () => {
     }
   };
 
+  const sortPrayerTimes = (times) => {
+    return times.sort((a, b) => {
+      // Convert times to comparable format (minutes since midnight)
+      const timeA = convertToMinutes(a.is_fixed_time ? a.time : a.calculated_time);
+      const timeB = convertToMinutes(b.is_fixed_time ? b.time : b.calculated_time);
+      return timeA - timeB;
+    });
+  };
+
+  const convertToMinutes = (timeString) => {
+    if (!timeString) return 24 * 60; // Push invalid times to the end
+    const [hours, minutes] = timeString.split(':');
+    return parseInt(hours) * 60 + parseInt(minutes);
+  };
+
+  const formatTimeWithoutSeconds = (timeString) => {
+    if (!timeString) return '';
+    if (timeString.includes(':')) {
+      const [hours, minutes] = timeString.split(':');
+      return `${hours}:${minutes}`;
+    }
+    return timeString;
+  };
+
   const formatTime = (prayer) => {
     if (prayer.is_fixed_time) {
-      return prayer.time;
+      return formatTimeWithoutSeconds(prayer.time);
     }
-    return prayer.calculated_time || 'לא ניתן לחשב את הזמן';
+    return formatTimeWithoutSeconds(prayer.calculated_time) || 'לא ניתן לחשב את הזמן';
   };
 
   const formatTimeDescription = (prayer) => {

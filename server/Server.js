@@ -1,12 +1,7 @@
 
 import express, { json } from 'express';
-import path, { parse } from 'path';
-import fs from 'fs/promises';
 import cors from 'cors';
-import multer from 'multer';
-import { format } from 'date-fns';
-import nodemialer from 'nodemailer'
-import jwt from 'jsonwebtoken';
+
 const app = express();
 const port = process.env.PORT || 5050;
 app.use(cors());

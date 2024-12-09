@@ -1,71 +1,328 @@
-
 .gabais-list-container {
-    background: linear-gradient(#f6d365, #fda085);
-    padding: 30px;
-    border-radius: 10px;
-margin: 0 auto;    width: 700px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gabais-list-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+/* Grid Layout */
+.gabais-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.gabai-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gabai-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.gabai-info h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.gabai-info .email {
+  margin: 0.5rem 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Form Styling */
+.add-gabai-form {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.add-gabai-form h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.add-gabai-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-gabai-form input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+.add-gabai-form input.error {
+  border-color: #dc3545;
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Buttons */
+delete-gabay-button{
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.delete-button:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.add-gabai-button {
+  flex: 1;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.add-gabai-button:hover:not(:disabled) {
+  background-color: #357abd;
+}
+
+.clear-form-button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.clear-form-button:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+/* Messages */
+.success-message,
+.error-message {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+  animation: messageFade 0.3s ease-in;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4a90e2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Delete Dialog */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.delete-dialog {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out;
+}
+
+.delete-dialog h3 {
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.delete-dialog p {
+  margin-bottom: 1.5rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cancel-button,
+.confirm-delete-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none;
+  min-width: 100px;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+.confirm-delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.confirm-delete-button:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+/* Disabled State */
+button:disabled {
+  background-color: #ccc !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
   }
-  
-  .gabais-list-title {
-    font-size: 32px;
-    text-align: center;
-    text-shadow: 2px 2px 2px #e6c365;  
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  .gabai-item {
-    background-color: #c6956b;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 12px 0;  
-    box-shadow: 2px 4px 8px #cbcbcb;
-  } 
-  
-  .gabai-divider {
-    border-color: #dd9a64;
+}
+
+@keyframes messageFade {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
   }
-  
-  .add-gabai-button {
-    background-color: #dd9a64;
-    color: white; 
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;  
-    border-radius: 4px;
-    cursor: pointer;  
-    box-shadow: 2px 2px 4px #cbcbcb;
-    transition: all 0.2s;  
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  .add-gabai-button:hover {
-    background-color: #e6c365;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .gabais-list-container {
+      margin: 1rem;
+      padding: 1rem;
   }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    padding: 8px 12px; 
-    width: 50%;
-    border-radius: 4px;
-    background: white;
-    border: 1px solid #ddd;
-    transition: box-shadow 0.2s;
+
+  .gabais-grid {
+      grid-template-columns: 1fr;
   }
-  
-  input:focus {
-    outline: none;
-    box-shadow: 0 0 4px #e6c365; 
+
+  .form-actions {
+      flex-direction: column;
   }
-  
-  
-  .delete-button {
-    background-color: #927d20;
-    border: none;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+
+  .dialog-buttons {
+      flex-direction: column;
   }
-  
-  .delete-button:hover {
-    transform: scale(1.2);
+
+  .cancel-button,
+  .confirm-delete-button {
+      width: 100%;
   }
-  
+
+  .delete-dialog {
+      margin: 1rem;
+      padding: 1.5rem;
+  }
+}

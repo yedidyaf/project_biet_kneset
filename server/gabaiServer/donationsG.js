@@ -1,19 +1,53 @@
 import dbFunctions from '../DatabaseFunctions/Donations.js';
-import multer from 'multer';
-
 import express from 'express';
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import fs from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
 const router = express.Router();
+
+
+const imagesDir = path.join(__dirname, '../../images');
+if (!fs.existsSync(imagesDir)) {
+    fs.mkdirSync(imagesDir, { recursive: true });
+}
+
+
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'images/');
+    destination: function(req, file, cb) {
+        const imagePath = path.join(__dirname, '../../images');
+        if (!fs.existsSync(imagePath)) {
+            fs.mkdirSync(imagePath, { recursive: true });
+        }
+        cb(null, imagePath);
     },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    },
+    filename: function(req, file, cb) {
+        const uniqueSuffix = Date.now();
+        const filename = `image-${uniqueSuffix}${path.extname(file.originalname)}`;
+        // שמירת הנתיב היחסי לתיקיית images
+        req.savedImagePath = 'images/' + filename;
+        cb(null, filename);
+    }
 });
-const upload = multer({
-    storage: storage,
+
+const upload = multer({ 
+    storage,
+    fileFilter: (req, file, cb) => {
+        // בדיקת סוג הקובץ
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only image files are allowed'));
+        }
+    }
 });
+
 
 router.get("/", async (req, res) => {
     try {
@@ -25,25 +59,24 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post("/", upload.single('file'), async (req, res) => {
+router.post('/', upload.single('file'), async (req, res) => {
     try {
-
-        const savedImagePath = 'C:\\Users\\User\\Documents\\.html\\project_biet_kneset\\server\\images\\' + req.file.originalname;
-
-        const updatedDonation = {
-            ...req.body,
-            image: savedImagePath,
+        const donationData = {
+            title: req.body.title,
+            content: req.body.content,
+            defaultAmount: req.body.defaultAmount || '36',
+            images: req.savedImagePath
         };
-
-        updatedDonation.image = JSON.stringify(updatedDonation.image);
-        const response = await dbFunctions.addDonation(updatedDonation);
-        res.status(200);
-        res.send(response);
+        const result = await dbFunctions.addDonation(donationData);
+        res.status(201).json(result);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Error adding donation:', error);
+        res.status(500).json({ error: error.message });
     }
 });
+
+
+
 router.put('/:id', upload.single('file'), async (req, res) => {
     try {
 
@@ -75,4 +108,19 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+
+router.get("/transactions", async (req, res) => {    
+    try {
+        const transactions = await dbFunctions.getDonationTransactions(req.params.id);
+        console.log(transactions);
+        
+        res.status(200).send(transactions);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
 export default router;

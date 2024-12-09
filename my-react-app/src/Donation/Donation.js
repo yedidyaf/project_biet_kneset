@@ -1,60 +1,69 @@
-// DonationComponent.jsx
-import React, { useState } from 'react';
-// import '../assets/css/Donations.css';
-import Gallery from '../component/Gallery';
-import Message from '../component/Message';
-import PayPalPaymentComponent from './PayPalPayment';
+import React, { useState, useEffect } from 'react';
+import axios from '../component/Axios';
 
-const Donation = ({ donation }) => {
-  const [visible, setVisible] = useState(false);
-  const [showPayment, setShowPayment] = useState(false);
-  const [amount, setAmount] = useState('36');
-  const text = donation.how;
+const Donation = ({ donation, onShowPayment }) => {
+  const [amount, setAmount] = useState(donation.default_amount || '36');
+  const [imageUrl, setImageUrl] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const handlePaymentSuccess = (details) => {
-    console.log('תשלום הושלם בהצלחה', details);
-    setShowPayment(false);
-    // כאן תוכל להוסיף לוגיקה נוספת, כמו עדכון השרת על התרומה
-  };
+  useEffect(() => {
+    const fetchImage = async () => {
+      if (donation.images) {
+        try {
+          const response = await axios.get('/api/getImage', {
+            params: { path: donation.images },
+            responseType: 'arraybuffer',
+          });
+          const imageUrl = URL.createObjectURL(
+            new Blob([response.data], { type: 'image/png' })
+          );
+          setImageUrl(imageUrl);
+        } catch (error) {
+          console.error('שגיאה בטעינת התמונה:', error);
+        }
+      }
+      setLoading(false);
+    };
 
-  const handlePaymentError = (error) => {
-    console.error('שגיאה בתשלום', error);
-    // כאן תוכל להוסיף טיפול בשגיאות
-  };
+    fetchImage();
+
+    return () => {
+      if (imageUrl) {
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, [donation.images]);
 
   return (
     <div className="donation-container">
-      <div className="donation-header">
-        <h2>{donation.title}</h2>
-      </div>
-      <div className="donation-content">
-        <p>{donation.content}</p>
-      </div>
-      <div className="donation-images">
-        {<Gallery images={[donation.images]}/>}
-      </div>
-      <input 
-        type="number" 
-        value={amount} 
-        onChange={(e) => setAmount(e.target.value)} 
-        placeholder="סכום לתרומה"
-      />
-      <button className="donate-button" onClick={() => setShowPayment(true)}>אני מעוניין לתרום</button>
-      <div>
-        {visible && (
-          <Message
-            message={text}
-            onClose={() => setVisible(false)}
-          />
+      <div className="donation-image">
+        {loading ? (
+          <div className="loading">טוען תמונה...</div>
+        ) : (
+          imageUrl && <img src={imageUrl} alt={donation.title} />
         )}
-        {showPayment && (
-          <PayPalPaymentComponent
-            amount={amount}
-            onSuccess={handlePaymentSuccess}
-            onError={handlePaymentError}
-            onClose={() => setShowPayment(false)}
+      </div>
+      <div className="donation-content-wrapper">
+        <div className="donation-header">
+          <h2>{donation.title}</h2>
+        </div>
+        <div className="donation-content">
+          <p>{donation.content}</p>
+        </div>
+        <div className="donation-actions">
+          <input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="סכום לתרומה"
+            min={donation.default_amount}
           />
-        )}
+          <button
+            className="donate-button"
+            onClick={() => onShowPayment(amount)}
+          >
+            תרומה       </button>
+        </div>
       </div>
     </div>
   );

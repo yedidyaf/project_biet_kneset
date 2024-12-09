@@ -10,7 +10,7 @@ function TimesG() {
           <div className="tfila-times">
             <TfilaTimes/>
            </div>
-          <div className="daily-times"> 
+          <div > 
             <DailyTimes  />
            </div> 
         </div>

@@ -1,72 +1,99 @@
 import React, { useState, useEffect } from 'react';
 // import '../../assets/css/DonationForm.css';
 
-const DonationForm = ({ selectedDonationId, onFormSubmit, donations }) => {
+const DonationForm = ({ onFormSubmit, donations }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [how, setHow] = useState('');
+  const [defaultAmount, setDefaultAmount] = useState('36');
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('defaultAmount', defaultAmount);
+    
+    if (image) {
+        formData.append('file', image);
+    }
 
+    onFormSubmit(formData);
+  };
 
   const handleImageChange = (e) => {
-    e.preventDefault();
-    const selectedImage = e.target.files[0];
-
-    setImage({
-      src: URL.createObjectURL(selectedImage),
-      alt: selectedImage.name,
-      data: selectedImage,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-
-    if (image) {
-      formData.append(`file`, image.data);
+    if (e.target.files[0]) {
+      const selectedImage = e.target.files[0];
+      setImage(selectedImage);
+      const previewUrl = URL.createObjectURL(selectedImage);
+      setImagePreview(previewUrl);
     }
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("how", how);
-      onFormSubmit('add', null, formData);
-      setTitle('');
-      setContent('');
-      setHow('');
-      setImage(null);
-    
   };
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="label">כותרת:</label>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="text-input" />
+          <input 
+            type="text" 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)} 
+            className="text-input" 
+            required
+          />
         </div>
         <div className="form-group">
           <label className="label">תוכן:</label>
-          <textarea value={content} onChange={(e) => setContent(e.target.value)} className="textarea-input" />
+          <textarea 
+            value={content} 
+            onChange={(e) => setContent(e.target.value)} 
+            className="textarea-input" 
+            required
+          />
         </div>
         <div className="form-group">
-          <label className="label">איך לתרום:</label>
-          <input type="text" value={how} onChange={(e) => setHow(e.target.value)} className="text-input" />
+          <label className="label">סכום דיפולטיבי:</label>
+          <input 
+            type="number" 
+            min="1"
+            value={defaultAmount} 
+            onChange={(e) => setDefaultAmount(e.target.value)} 
+            className="text-input" 
+            required
+          />
         </div>
         <div className="form-group">
-          <label className="label file-input">תמונות:</label>
-          <input type="file" accept="image/*" name='file' onChange={handleImageChange} />
+          <label>תמונה:</label>
+          <input
+            type="file"
+            onChange={handleImageChange}
+            accept="image/*"
+          />
         </div>
-        {image && (
+        {imagePreview && (
           <div className="form-group images-container">
-            <p className="label">תמונות:</p>
-            <img src={image.src} alt={image.alt} className="image-preview" />
+            <p className="label">תצוגה מקדימה:</p>
+            <img 
+              src={imagePreview} 
+              alt="תצוגה מקדימה" 
+              className="image-preview"
+            />
           </div>
         )}
-        <button type="submit" className="submit-button"> הוספת תרומה</button>
+        <button type="submit" className="submit-button">הוספת תרומה</button>
       </form>
     </div>
   );
 };
-
 export default DonationForm;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { format } from 'date-fns';
-// import "../../assets/css/Article.css";
+import "../../assets/css/Article.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../component/Axios.js';
 import Gallery from "../../component/Gallery.js";
@@ -55,12 +55,13 @@ const ArticleG = () => {
           <div className="author">{article.author}</div>
         )}
         <p className="text">{article.content}</p>
-        <button className="close-button" onClick={() => {navigate(`/gabai/news`); }}>
-          סגור
-        </button>
-        <button className="delete-button" onClick={() => {deleteArtical(article.id)} }>
+         <button className="delete-button_" onClick={() => {deleteArtical(article.id)} }>
           הסר כתבה
         </button>
+        <button className="close-button_" onClick={() => {navigate(`/gabai/news`); }}>
+          סגור
+        </button>
+       
       </div>
     </div>
   );

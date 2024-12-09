@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Gallery from "./Gallery";
 import { format } from 'date-fns';
-// import "../assets/css/Article.css";
+import "../assets/css/Article.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from '../component/Axios.js';
 

@@ -1,0 +1,164 @@
+/* DonationCard.css */
+.donation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .donation-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .donation-card:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .donation-card-header {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .donation-card-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .donation-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .donation-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .donation-card-content {
+    padding: 1rem;
+  }
+  
+  .donation-card-actions {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .delete-btn {
+    background-color: #64664e;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: #614141;
+  }
+  
+  .history-btn {
+    background-color: #4c5d6a;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .history-btn:hover {
+    background-color: #394650;
+  }
+  
+  .donate-btn {
+    background-color: #48bb78;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .donate-btn:hover {
+    background-color: #38a169;
+  }
+  
+  .donation-stats {
+    padding: 1rem;
+    background-color: #f7fafc;
+    border-radius: 0.25rem;
+    margin: 1rem;
+  }
+  
+  .donation-history {
+    padding: 1rem;
+  }
+  
+  .donation-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .donation-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .donation-history th,
+  .donation-history td {
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+    text-align: right;
+  }
+  
+  .donation-history th {
+    background-color: #f7fafc;
+    font-weight: bold;
+  }
+  
+  .default-amount {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .donation-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .donation-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background-color: #f5f5f5;
+}
+
+.donation-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.image-preview {
+    max-width: 200px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .images-container {
+    margin-top: 1rem;
+  }

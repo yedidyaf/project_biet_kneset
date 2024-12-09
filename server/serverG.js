@@ -82,6 +82,8 @@ app.use("/api/gabai/login", loginRoutes);
 
 
 app.get('/api/getImage', async (req, res) => {
+    console.log("ppp");
+    
     const imagePath = req.query.path;
     console.log(imagePath);
     try {

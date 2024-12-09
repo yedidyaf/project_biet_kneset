@@ -1,118 +1,216 @@
-/* DonationComponent.css */
-.all-donations-container{
-  background-color: #cf4545;
-width: 60%;
-margin: 0 auto;
+/* donations.css */
+
+/* Container ראשי */
+.all-donations-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  direction: rtl;
 }
+
+.all-donations-container h1 {
+  text-align: center;
+  color: #1a365d;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.all-donations-container h1:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #4299e1;
+}
+
+/* קארד תרומה */
 .donation-container {
-    background-color: #f5f5f5;
-    border: 2px solid #ccc;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    margin: 0 auto;
-  margin-top: 70px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .donation-container {
+    grid-template-columns: minmax(300px, 1fr) 1.5fr;
+    min-height: 300px;
   }
-  
-  .donation-header {
-    text-align: center;
+}
+
+/* כותרת וטקסט */
+.donation-content-wrapper {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.donation-header {
+  margin-bottom: 20px;
+}
+
+.donation-header h2 {
+  color: #2d3748;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.donation-content {
+  color: #4a5568;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  flex-grow: 1;
+}
+
+/* תמונה */
+.donation-image {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  background: #f7fafc;
+}
+
+@media (min-width: 768px) {
+  .donation-image {
+    height: 100%;
   }
-  
-  .donation-content {
-    font-size: 1.2em;
-    margin-top: 10px;
-    white-space: pre-wrap
-  }
-  
-  .donation-images {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  
-    img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-  }
-  
-  .donate-button {
-    background-color: #ebb3a9;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.5em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    outline: none;
-    
+}
+
+.donation-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #718096;
+}
+
+/* אזור התשלום */
+.donation-actions {
+  padding: 20px 30px;
+  background: #f8fafc;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  border-top: 1px solid #e2e8f0;
+}
+
+.donation-actions input {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  width: 150px;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+
+.donation-actions input:focus {
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+  outline: none;
+}
+
+.donate-button {
+  background: #998449;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .donate-button:hover {
-    background-color: #2a1375;
+  background: #b3a35d;
+  transform: translateY(-1px);
 }
 
-  
+/* PayPal Modal */
+.paypal-payment-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  z-index: 1000;
+}
 
+.paypal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
 
+.paypal-payment-form h2 {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+}
 
+.paypal-payment-form button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #718096;
+  transition: color 0.2s;
+}
 
+.paypal-payment-form button:hover {
+  color: #2d3748;
+}
 
-  .all-donations-container {
-    background-color: #f8e8b6; 
-    padding: 20px;
-    border-radius: 10px;
-    animation: slide-down 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/* מצבי שגיאה */
+.error {
+  background: #fff5f5;
+  color: #c53030;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .donation-actions {
+    flex-direction: column;
   }
-  
-  @keyframes slide-down {
-    0% {
-      transform: translateY(-20px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);  
-      opacity: 1; 
-    }
+
+  .donation-actions input {
+    width: 100%;
   }
-  
-  h1 {
-    font-size: 32px;
-    text-shadow: 2px 2px 2px #d4b483;  
-    animation: hue-rotate 6s infinite linear;
+
+  .donate-button {
+    width: 100%;
   }
-  
-  @keyframes hue-rotate {
-    from {
-      filter: hue-rotate(0deg);
-    }
-    to {
-      filter: hue-rotate(360deg);  
-    }
-  }
-  
-  button {
-    background-color: #d2955d;
-    color: white;
-    padding: 12px 20px;
-    border: none; 
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s;  
-    box-shadow: 2px 2px 2px #c38850; 
-  }
-  
-  button:hover {
-    transform: scale(1.06) rotate(-1deg);
-    box-shadow: 4px 4px 2px #c38850;
-  }
-  
-  .donation-container { 
-    background-color: #fff0cd;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 3px 3px 5px #ccc;
-  }
+}

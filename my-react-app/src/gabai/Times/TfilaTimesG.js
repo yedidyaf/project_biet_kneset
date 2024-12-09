@@ -9,6 +9,15 @@ const TfilaTimesG = () => {
   const [weekday, setWeekday] = useState([]);
   const [sabbath, setSabbath] = useState([]);
 
+  const formatTimeWithoutSeconds = (timeString) => {
+    if (!timeString) return '';
+    if (timeString.includes(':')) {
+      const [hours, minutes] = timeString.split(':');
+      return `${hours}:${minutes}`;
+    }
+    return timeString;
+  };
+
   useEffect(() => {
     fetchPrayerTimes();
   }, []);
@@ -61,27 +70,6 @@ const TfilaTimesG = () => {
     }
   };
 
-  const formatRelativeTime = (prayer) => {
-    if (prayer.is_fixed_time) {
-      return prayer.time;
-    }
-
-    const referenceTimeLabels = {
-      'alotHaShachar': 'עלות השחר',
-      'misheyakir': 'משיכיר',
-      'sunrise': 'הנץ החמה',
-      'sofZmanShma': 'סוף זמן ק"ש',
-      'sofZmanShmaMGA': 'סוף זמן ק"ש מג"א',
-      'sofZmanTfilla': 'סוף זמן תפילה',
-      'sofZmanTfillaMGA': 'סוף זמן תפילה מג"א',
-      'chatzot': 'חצות',
-      'sunset': 'שקיעה',
-      'tzeit7083deg': 'צאת הכוכבים'
-    };
-
-    return `${prayer.minutes_offset} דקות ${prayer.is_before ? 'לפני' : 'אחרי'} ${referenceTimeLabels[prayer.reference_time] || prayer.reference_time}`;
-  };
-
   const TimeTable = ({ times, title }) => (
     <div className="prayer-times-section">
       <h3 className="section-title">{title}</h3>
@@ -99,8 +87,9 @@ const TfilaTimesG = () => {
             <tr key={prayer.id}>
               <td>{prayer.name}</td>
               <td>
-                {prayer.is_fixed_time ? prayer.time : 
-                 prayer.calculated_time || 'לא ניתן לחשב את הזמן'}
+                {prayer.is_fixed_time ? 
+                  formatTimeWithoutSeconds(prayer.time) : 
+                  formatTimeWithoutSeconds(prayer.calculated_time) || 'לא ניתן לחשב את הזמן'}
               </td>
               <td>
                 {prayer.is_fixed_time ? 
@@ -112,7 +101,7 @@ const TfilaTimesG = () => {
                 <button className="edit-button" onClick={() => handleEditClick(prayer.id)}>
                   עריכה
                 </button>
-                <button className="delete-button" onClick={() => handleDeleteClick(prayer.id)}>
+                <button className="delete-time-button" onClick={() => handleDeleteClick(prayer.id)}>
                   מחיקה
                 </button>
               </td>
@@ -123,7 +112,6 @@ const TfilaTimesG = () => {
     </div>
   );
   
-  // פונקציית עזר להצגת שמות הזמנים בעברית
   const getReferenceTimeLabel = (referenceTime) => {
     const labels = {
       'alotHaShachar': 'עלות השחר',
@@ -140,8 +128,6 @@ const TfilaTimesG = () => {
     return labels[referenceTime] || referenceTime;
   };
 
-  
-  
   return (
     <div className="tfila-times-container">
       <div className="header">

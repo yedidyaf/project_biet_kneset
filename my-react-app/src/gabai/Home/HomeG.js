@@ -46,18 +46,7 @@ const HomeG = () => {
     <div dir = "ltr">
 
 
-      {isChange && <ChangeArticleG
-        title={"שנה כתבה"}
-        onAddArticle={onAddArticle}
-        article={article}
-        isChange={() => setIsChange(false)}
-        path={'/gabai/home'} />}
-      {article && <GalleryCarousel images={article.images}/>}
-      {/* {article ? (
-        <ImageCarousel images={article.images} />
-      ) : (
-        <p>Loading article...</p>
-      )} */}
+      
       <br />
       <br />
 
@@ -71,7 +60,20 @@ const HomeG = () => {
           שנה כתבה
         </button>
       </div>
-
+      <br>
+      </br>
+{isChange && <ChangeArticleG
+        title={"שנה כתבה"}
+        onAddArticle={onAddArticle}
+        article={article}
+        isChange={() => setIsChange(false)}
+        path={'/gabai/home'} />}
+      {article && <GalleryCarousel images={article.images}/>}
+      {/* {article ? (
+        <ImageCarousel images={article.images} />
+      ) : (
+        <p>Loading article...</p>
+      )} */}
       {article ? (
         <ArticleHome article={article} />
       ) : (

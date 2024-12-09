@@ -1,35 +1,83 @@
 import DatabaseFunctions from './DatabaseFunctions.js';
 
 class Donations extends DatabaseFunctions {
+    // קבלת כל הקטגוריות עם סכומי ברירת מחדל
     async getDonations() {
         try {
-            const [result] = await this.pool.query(`SELECT * FROM donations`);
+            const [result] = await this.pool.query(`
+            SELECT id, title, content, images, default_amount 
+            FROM donations
+        `);
             return result;
         } catch (error) {
             console.error(error);
             return error;
         }
     }
-    async addDonation(donation){
-        try {
-            const res = await this.pool.query(`
-                INSERT INTO donations (title, content, how ,images) 
-                VALUES (?, ?, ?, ?)`,
-                [donation.title, donation.content,donation.how, donation.image]);
 
-            return { ...donation, id: res.insertId };
+    // הוספת קטגוריה חדשה
+    async addDonation(donation) {
+        try {    
+            const [result] = await this.pool.query(`
+                INSERT INTO donations (title, content, images, default_amount) 
+                VALUES (?, ?, ?, ?)`,
+                [
+                    donation.title,
+                    donation.content,
+                    donation.images, // וידוא שיש כאן ערך
+                    donation.defaultAmount
+                ]
+            );
+    
+            return { 
+                id: result.insertId,
+                ...donation
+            };
         } catch (error) {
-            console.log(error);
-            return error;
+            console.error('Error in addDonation with data:', donation);
+            throw error;
         }
     }
-    async putDonation(id, donation){
+    // תיעוד תרומה חדשה
+    async addDonationTransaction(transaction) {
+        console.log("הגיעה תרומה");
+        
+        try {
+            const [result] = await this.pool.query(`
+            INSERT INTO donation_transactions 
+            (category_id, amount, payment_id) 
+            VALUES (?, ?, ?)`,
+                [transaction.categoryId, transaction.amount, transaction.paymentId]
+            );
+            return { ...transaction, id: result.insertId };
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    // קבלת היסטוריית תרומות לקטגוריה
+    async getDonationTransactions(categoryId) {
+        try {
+            const [result] = await this.pool.query(`
+            SELECT * FROM donation_transactions 
+            ORDER BY donation_date DESC`              
+            );
+            return result;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    } 
+    
+    
+    async putDonation(id, donation) {
         try {
             const res = await this.pool.query(`
             UPDATE donations
-            SET  title =?, content = ? ,how = ?  ,images = ? 
+            SET  title =?, content = ?  ,images = ? 
                 WHERE id = ?`,
-                [donation.title, donation.content, donation.how, donation.image,  id]);
+                [donation.title, donation.content, donation.image, id]);
 
             return { ...donation, id: res.insertId };
         } catch (error) {
@@ -39,19 +87,46 @@ class Donations extends DatabaseFunctions {
     }
     async deleteDonation(id) {
         try {
-            const res = await this.pool.query(`DELETE FROM donations WHERE id = ?`, [id]);
+            // יצירת טרנזקציה להבטחת עקביות הנתונים
+            const connection = await this.pool.getConnection();
+            await connection.beginTransaction();
     
-            if (res.affectedRows === 0) {
-                throw new Error(`Donation with ID ${id} not found`);
+            try {
+                // קודם מחיקת כל העסקאות הקשורות לקטגוריה
+                await connection.query(
+                    'DELETE FROM donation_transactions WHERE category_id = ?',
+                    [id]
+                );
+    
+                // אחר כך מחיקת הקטגוריה עצמה
+                const [result] = await connection.query(
+                    'DELETE FROM donations WHERE id = ?',
+                    [id]
+                );
+    
+                if (result.affectedRows === 0) {
+                    throw new Error(`קטגוריית תרומה עם מזהה ${id} לא נמצאה`);
+                }
+    
+                // אישור הטרנזקציה
+                await connection.commit();
+                connection.release();
+    
+                return `קטגוריית תרומה עם מזהה ${id} נמחקה בהצלחה!`;
+    
+            } catch (error) {
+                // במקרה של שגיאה - ביטול כל השינויים
+                await connection.rollback();
+                connection.release();
+                throw error;
             }
     
-            return `Donation with ID ${id} deleted successfully!`;
         } catch (error) {
-            console.error(error);
-            return error;
+            console.error('שגיאה במחיקת קטגוריית תרומה:', error);
+            throw error;
         }
     }
-    
+
 }
 
 export default new Donations();

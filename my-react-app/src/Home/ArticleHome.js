@@ -9,17 +9,13 @@ const ArticleHome = ({ article, onClose, deleteArtical }) => {
 
   const { id, date, title, content, author } = article;
 
-  // פונקציה להמרת טקסט עם סימני פורמט למבנה HTML
   const formatText = (text) => {
     if (!text) return '';
 
-    // מחלקים את הטקסט לחלקים לפי הסימנים המיוחדים
     const parts = text.split(/(\*\*.*?\*\*)/g);
 
     return parts.map((part, index) => {
-      // בודקים אם החלק הוא טקסט מודגש (בין כוכביות)
       if (part.startsWith('**') && part.endsWith('**')) {
-        // מסירים את הכוכביות ומחזירים span מודגש
         const innerText = part.slice(2, -2);
         return (
           <span key={index} className="highlighted-text" style={{ 
@@ -32,7 +28,6 @@ const ArticleHome = ({ article, onClose, deleteArtical }) => {
           </span>
         );
       }
-      // מחזירים טקסט רגיל
       return <span key={index}>{part}</span>;
     });
   };
