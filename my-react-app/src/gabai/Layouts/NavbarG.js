@@ -59,7 +59,7 @@ const NavbarG = () => {
         <p>רחוב האצ"ל 13, בני ברק</p>
         <p>כתובת המייל: jbh0527174650@gmail.com</p>
         <p>פניות בנוגע לאתר: yedidya friedland</p>
-        <FloatingWhatsApp
+        {/* <FloatingWhatsApp
           phoneNumber="+972527174650"
           accountName="גבאי בית הכנסת"
           statusMessage="בית כנסת חניכי הישיבות תל גיבורים"
@@ -71,7 +71,7 @@ const NavbarG = () => {
           buttonClassName="floating-whatsapp-button"
           avatar={gabaiAvatar}
           allowBounce={false}
-        />
+        /> */}
       </div>
     </>
   );

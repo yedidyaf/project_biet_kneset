@@ -20,7 +20,7 @@ const AllCardsG = ({ title, AddArticle }) => {
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-        if(error.response.data.error==='Authentication failed: Missing token'){
+        if (error.response.data.error === 'Authentication failed: Missing token') {
           navigate('/gabai/login');
         }
       });
@@ -31,7 +31,7 @@ const AllCardsG = ({ title, AddArticle }) => {
       .then(response => {
         console.log(response.data);
         setSelectedArticle(null)
-        setNewA((prev)=>!prev)
+        setNewA((prev) => !prev)
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -44,15 +44,15 @@ const AllCardsG = ({ title, AddArticle }) => {
     navigate(`/gabai/news/${data.id}`);
   };
 
-  
+
 
   return (
     <div className="all-cards">
-      {!selectedArticle&& <h1 className="all-cards-title">{title}</h1>}
-      
+      {!selectedArticle && <h1 className="all-cards-title">{title}</h1>}
 
-      { <div className="cards-container">
-        {cardsData.map((card) => (
+
+      {<div className="cards-container">
+        {[...cardsData].reverse().map((card) => (
           <CardComponent key={card.id} data={card} onClick={() => handleCardClick(card)} deleteArtical={deleteArtical} />
         ))}</div>}
     </div>

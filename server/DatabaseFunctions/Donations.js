@@ -17,7 +17,7 @@ class Donations extends DatabaseFunctions {
 
     // הוספת קטגוריה חדשה
     async addDonation(donation) {
-        try {    
+        try {
             const [result] = await this.pool.query(`
                 INSERT INTO donations (title, content, images, default_amount) 
                 VALUES (?, ?, ?, ?)`,
@@ -28,8 +28,8 @@ class Donations extends DatabaseFunctions {
                     donation.defaultAmount
                 ]
             );
-    
-            return { 
+
+            return {
                 id: result.insertId,
                 ...donation
             };
@@ -41,7 +41,7 @@ class Donations extends DatabaseFunctions {
     // תיעוד תרומה חדשה
     async addDonationTransaction(transaction) {
         console.log("הגיעה תרומה");
-        
+
         try {
             const [result] = await this.pool.query(`
             INSERT INTO donation_transactions 
@@ -61,16 +61,16 @@ class Donations extends DatabaseFunctions {
         try {
             const [result] = await this.pool.query(`
             SELECT * FROM donation_transactions 
-            ORDER BY donation_date DESC`              
+            ORDER BY donation_date DESC`
             );
             return result;
         } catch (error) {
             console.error(error);
             throw error;
         }
-    } 
-    
-    
+    }
+
+
     async putDonation(id, donation) {
         try {
             const res = await this.pool.query(`
@@ -90,43 +90,35 @@ class Donations extends DatabaseFunctions {
             // יצירת טרנזקציה להבטחת עקביות הנתונים
             const connection = await this.pool.getConnection();
             await connection.beginTransaction();
-    
+
             try {
-                // קודם מחיקת כל העסקאות הקשורות לקטגוריה
                 await connection.query(
                     'DELETE FROM donation_transactions WHERE category_id = ?',
                     [id]
                 );
-    
-                // אחר כך מחיקת הקטגוריה עצמה
                 const [result] = await connection.query(
                     'DELETE FROM donations WHERE id = ?',
                     [id]
                 );
-    
+
                 if (result.affectedRows === 0) {
                     throw new Error(`קטגוריית תרומה עם מזהה ${id} לא נמצאה`);
                 }
-    
-                // אישור הטרנזקציה
                 await connection.commit();
                 connection.release();
-    
+
                 return `קטגוריית תרומה עם מזהה ${id} נמחקה בהצלחה!`;
-    
             } catch (error) {
-                // במקרה של שגיאה - ביטול כל השינויים
                 await connection.rollback();
                 connection.release();
                 throw error;
             }
-    
+
         } catch (error) {
             console.error('שגיאה במחיקת קטגוריית תרומה:', error);
             throw error;
         }
     }
-
 }
 
 export default new Donations();

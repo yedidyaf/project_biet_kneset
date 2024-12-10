@@ -165,19 +165,19 @@ const GabaiList = () => {
             )}
 
             <div className="gabais-grid">
-                {gabais.map((gabai) => (
+                {gabais.map((gabai, i) => (
                     <div key={gabai.id} className="gabai-card">
                         <div className="gabai-info">
                             <h3>{`הרב ${gabai.user_id} ${gabai.last_name} שליט"א`}</h3>
                             <p className="email">{gabai.email}</p>
-                        </div>
+                        </div>{i !== 0?
                         <button 
                             className="delete-gabay-button"
                             onClick={() => openDeleteDialog(gabai)}
                             disabled={isLoading}
                         >
                             מחק 🗑️
-                        </button>
+                        </button>: ""}
                     </div>
                 ))}
             </div>

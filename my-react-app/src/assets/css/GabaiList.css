@@ -79,7 +79,7 @@
 
 .add-gabai-form input:focus {
   outline: none;
-  border-color: #4a90e2;
+  border-color: #ded278;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
 }
 
@@ -118,7 +118,7 @@ delete-gabay-button{
 
 .add-gabai-button {
   flex: 1;
-  background-color: #4a90e2;
+  background-color: #51514e;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -129,7 +129,7 @@ delete-gabay-button{
 }
 
 .add-gabai-button:hover:not(:disabled) {
-  background-color: #357abd;
+  background-color: #adaea4;
 }
 
 .clear-form-button {

@@ -49,12 +49,12 @@ const ArticleG = () => {
           {article.images && article.images.length > 0 && <Gallery images={article.images} />}
         </div>
         {article.date && (
-          <div className="date">{format(new Date(article.date), 'dd-MM-yyyy')}</div>
+          <div className="date__">{format(new Date(article.date), 'dd-MM-yyyy')}</div>
         )}
         {article.author && (
-          <div className="author">{article.author}</div>
+          <div className="author__">{article.author}</div>
         )}
-        <p className="text">{article.content}</p>
+        <p className="text__">{article.content}</p>
          <button className="delete-button_" onClick={() => {deleteArtical(article.id)} }>
           הסר כתבה
         </button>

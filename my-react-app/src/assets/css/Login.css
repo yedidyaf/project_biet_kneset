@@ -1,43 +1,115 @@
-.login-container {
-    text-align: center;
+.gabai-system__login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  direction: rtl;
+}
+
+.gabai-system__login-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.gabai-system__login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.gabai-system__login-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.gabai-system__login-subtitle {
+  font-size: 18px;
+  color: #666;
+  font-weight: normal;
+}
+
+.gabai-system__login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gabai-system__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gabai-system__input-label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.gabai-system__input-field {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.gabai-system__input-field:focus {
+  outline: none;
+  border-color: #da8860;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+.gabai-system__input-field::placeholder {
+  color: #999;
+}
+
+.gabai-system__error-message {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  color: #ff4d4f;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.gabai-system__submit-button {
+  background-color: #e47137;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.gabai-system__submit-button:hover {
+  background-color: #da8860;
+}
+
+.gabai-system__submit-button:active {
+  background-color: #dda88e;
+}
+
+@media (max-width: 480px) {
+  .gabai-system__login-container {
     padding: 20px;
-    background-color: #c79a56;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    width: 1000px;
   }
   
-  .login-form {
-    display: inline-block;
-    text-align: left;
+  .gabai-system__login-title {
+    font-size: 20px;
   }
   
-  .login-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  .gabai-system__login-subtitle {
+    font-size: 16px;
   }
-  
-  .login-button {
-    background-color: #0b4266;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.5em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-button:hover {
-    background-color: #306284;
-  }
-  
-  .login-error {
-    color: red;
-    margin-top: 10px;
-  }
-  
+}

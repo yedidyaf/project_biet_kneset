@@ -38,14 +38,14 @@ const ArticleHome = ({ article, onClose, deleteArtical }) => {
         <h1 className="title">{title}</h1>
         
         {date && (
-          <div className="date">{format(date, 'dd-MM-yyyy')}</div>
+          <div className="date__">{format(date, 'dd-MM-yyyy')}</div>
         )}
 
         {author && (
-          <div className="author">{author}</div>
+          <div className="author__">{author}</div>
         )}
 
-        <p className="text">{formatText(content)}</p>
+        <p className="text__">{formatText(content)}</p>
 
         {deleteArtical && (
           <button

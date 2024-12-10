@@ -40,14 +40,14 @@ const Article = () => {
           {article.images && article.images.length > 0 && <Gallery images={article.images} />}
         </div>
         {article.date && (
-          <div className="date">{format(new Date(article.date), 'dd-MM-yyyy')}</div>
+          <div className="date__">{format(new Date(article.date), 'dd-MM-yyyy')}</div>
         )}
         {article.author && (
-          <div className="author">{article.author}</div>
+          <div className="author__">{article.author}</div>
         )}
-        <p className="text">{article.content}</p>
-        <button className="close-button" onClick={() => { navigate(`/news`); }}>
-          סגור
+        <p className="text__">{article.content}</p>
+        <button className="close-button_" onClick={() => { navigate(`/news`); }}>
+          לחזרה
         </button>
       </div>
     </div>

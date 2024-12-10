@@ -22,7 +22,6 @@ const Donations = () => {
     }, []);
 
     const handlePaymentSuccess = (details) => {
-        console.log('תשלום הושלם בהצלחה', details);
         axios.post('/donations/transactions', {
             categoryId: selectedCategory,
             amount: amount,

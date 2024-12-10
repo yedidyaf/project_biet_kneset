@@ -36,23 +36,21 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
   const handleSubmit = (e) => {
     e.preventDefault();
     onFormSubmit(editMode ? 'edit' : 'add', selectedPrayerId, formData);
-    if (!editMode) {
-      setFormData({
-        name: '',
-        time: '',
-        is_sabbath: false,
-        is_fixed_time: true,
-        reference_time: '',
-        minutes_offset: 0,
-        is_before: true
-      });
-    }
+    setFormData({
+      name: '',
+      time: '',
+      is_sabbath: false,
+      is_fixed_time: true,
+      reference_time: '',
+      minutes_offset: 0,
+      is_before: true
+    });
   };
 
   return (
     <div className="prayer-form-container">
       <h3>{editMode ? 'עריכת זמן תפילה' : 'הוספת זמן תפילה חדש'}</h3>
-      
+
       <form onSubmit={handleSubmit} className="prayer-form">
         <div className="form-group">
           <label>שם התפילה</label>
@@ -64,7 +62,7 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group_">
           <label>סוג זמן</label>
           <div className="radio-group">
             <label>
@@ -103,22 +101,22 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
               <input
                 type="number"
                 value={formData.minutes_offset}
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  minutes_offset: parseInt(e.target.value) || 0 
+                onChange={(e) => setFormData(prev => ({
+                  ...prev,
+                  minutes_offset: parseInt(e.target.value) || 0
                 }))}
                 required={!formData.is_fixed_time}
                 min="0"
               />
             </div>
-            
+
             <div className="form-group">
               <label>מיקום</label>
               <select
                 value={formData.is_before ? 'before' : 'after'}
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  is_before: e.target.value === 'before' 
+                onChange={(e) => setFormData(prev => ({
+                  ...prev,
+                  is_before: e.target.value === 'before'
                 }))}
               >
                 <option value="before">לפני</option>
@@ -126,13 +124,13 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
               </select>
             </div>
 
-            <div className="form-group">
+            <div className="form-group_">
               <label>זמן ייחוס</label>
               <select
                 value={formData.reference_time}
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  reference_time: e.target.value 
+                onChange={(e) => setFormData(prev => ({
+                  ...prev,
+                  reference_time: e.target.value
                 }))}
                 required={!formData.is_fixed_time}
               >
@@ -147,14 +145,14 @@ const TfilaTimesForm = ({ editMode, selectedPrayerId, onFormSubmit, ArrTfilaTime
           </div>
         )}
 
-        <div className="form-group checkbox-group">
+        <div className="form-group_ checkbox-group">
           <label>
             <input
               type="checkbox"
               checked={formData.is_sabbath}
-              onChange={(e) => setFormData(prev => ({ 
-                ...prev, 
-                is_sabbath: e.target.checked 
+              onChange={(e) => setFormData(prev => ({
+                ...prev,
+                is_sabbath: e.target.checked
               }))}
             />
             זמן שבת
